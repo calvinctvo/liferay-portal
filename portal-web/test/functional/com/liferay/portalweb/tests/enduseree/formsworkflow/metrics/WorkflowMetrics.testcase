@@ -98,7 +98,7 @@ definition {
 			value1 = "${key_testSLADefinitionDays}");
 	}
 
-	@description = "See process item detail page(LRQA-53662)"
+	@description = "Apply filter for Assignee Search(LRQA-53633)"
 	@priority = "5"
 	test ApplySearchesForAllAssignees {
 
