@@ -254,19 +254,16 @@
 	<td>//tr[${rowNumber}]//td[(@data-testid='taskCount')]</td>
 	<td></td>
 </tr>
-
 <tr>
 	<td>METRICS_WORKLOAD_BY_ASSIGNEE_NAME_TABLE</td>
 	<td>//tr[${rowNumber}]//td[@class='lfr-title-column table-cell-expand table-title']</td>
 	<td></td>
 </tr>
-
 <tr>
 	<td>METRICS_WORKLOAD_BY_ASSIGNEE_SEARCH_ASSIGNEE_NAME</td>
 	<td>//input[@placeholder='Search for Assignee Name']</td>
 	<td></td>
 </tr>
-
 <tr>
 	<td>METRICS_WORKLOAD_BY_ASSIGNEE_FILTER_CLEAR_ALL</td>
 	<td>//a[@class='component-link tbar-link']</td>
