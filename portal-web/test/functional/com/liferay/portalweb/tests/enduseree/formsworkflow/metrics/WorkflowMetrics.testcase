@@ -103,14 +103,12 @@ definition {
 	test ApplySearchesForAllAssignees {
 
 		ProductMenu.gotoPortlet(
-			category = "Workflow",
-			panel = "Control Panel",
-			portlet = "Process Builder");
-
-		Navigator.gotoNavItem(navItem = "Configuration");
+			category = "Configuration",
+			panel = "Site Administration",
+			portlet = "Workflow");
 
 		Workflow.configureWorkflow(
-			workflowDefinition = "Single Approver",
+			workflowDefinition = "Default: Single Approver",
 			workflowResourceValue = "Blogs Entry");
 
 		ProductMenu.gotoPortlet(
@@ -170,12 +168,7 @@ definition {
 
 			Click(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_SEARCH_ASSIGNEE_NAME");
 
-			WorkflowMetrics.viewWorkloadByAssigneeSingleApprover(
-				assigneeName = "${count}user user${count}",
-				onTimeTaskCount = "0",
-				overdueTaskCount = "0",
-				rowNumber = "${count}",
-				totalPendingTaskCount = "1");
+			WorkflowMetrics.viewWorkloadByAssigneeSingleApprover(assigneeName = "${count}user user${count}");
 		}
 
 		WorkflowMetrics.selectWorkloadByAssigneeCardFilterValueProcessStep(workflowStep = "Review");
@@ -186,15 +179,18 @@ definition {
 
 		WorkflowMetrics.searchForAssigneeName(assigneeName = "something else");
 
+		AssertTextEquals.assertPartialText(
+			locator1 = "Message#EMPTY_INFO",
+			value1 = "No results were found.");
+
 		WorkflowMetrics.clearAllFilter();
 
 		for (var count : list "1,2,3") {
-			WorkflowMetrics.viewWorkloadByAssigneeSingleApprover(
-				assigneeName = "${count}user user${count}",
-				onTimeTaskCount = "0",
-				overdueTaskCount = "0",
-				rowNumber = "${count}",
-				totalPendingTaskCount = "1");
+			WorkflowMetrics.selectWorkloadByAssigneeCardFilterValue(workflowStep = "${count}Role");
+
+			Click(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_SEARCH_ASSIGNEE_NAME");
+
+			WorkflowMetrics.viewWorkloadByAssigneeSingleApprover(assigneeName = "${count}user user${count}");
 		}
 	}
 
