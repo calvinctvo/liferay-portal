@@ -256,7 +256,7 @@
 </tr>
 <tr>
 	<td>METRICS_WORKLOAD_BY_ASSIGNEE_NAME_TABLE</td>
-	<td>//span[contains(text(),'${assigneeName}')]</td>
+	<td>//span[contains(text(),'${key_assigneeName}')]</td>
 	<td></td>
 </tr>
 <tr>
