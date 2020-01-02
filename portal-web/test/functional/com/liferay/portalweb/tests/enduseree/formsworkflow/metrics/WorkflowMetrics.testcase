@@ -163,13 +163,34 @@ definition {
 			key_assigneesNumber = "3",
 			locator1 = "WorkflowMetrics#METRICS_PERFORMANCE_BY_ASSIGNEE_CARD_VIEW_ALL_ASSIGNEES_LINK");
 
-		for (var count : list "1,2,3") {
-			WorkflowMetrics.selectWorkloadByAssigneeCardFilterValue(workflowStep = "${count}Role");
+		
+		WorkflowMetrics.selectWorkloadByAssigneeCardFilterValue(workflowStep = "1Role");
 
-			Click(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_SEARCH_ASSIGNEE_NAME");
+		Click(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_SEARCH_ASSIGNEE_NAME");
 
-			WorkflowMetrics.viewWorkloadByAssigneeSingleApprover(assigneeName = "${count}user user${count}");
-		}
+		WorkflowMetrics.viewWorkloadByAssigneeSingleApprover(
+				assigneeName = "1user user1",
+				isNotPresent = "2user user2,3user user3",
+				isPresent = "1user user1");
+
+		WorkflowMetrics.selectWorkloadByAssigneeCardFilterValue(workflowStep = "2Role");
+
+		Click(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_SEARCH_ASSIGNEE_NAME");
+
+		WorkflowMetrics.viewWorkloadByAssigneeSingleApprover(
+				assigneeName = "2user user2",
+				isNotPresent = "3user user3",
+				isPresent = "1user user1,2user user2");
+		
+		WorkflowMetrics.selectWorkloadByAssigneeCardFilterValue(workflowStep = "3Role");
+
+		Click(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_SEARCH_ASSIGNEE_NAME");
+
+		WorkflowMetrics.viewWorkloadByAssigneeSingleApprover(
+				assigneeName = "3user user3",
+				isNotPresent = "somethingelse",
+				isPresent = "1user user1,2user user2,3user user3");
+		
 
 		WorkflowMetrics.selectWorkloadByAssigneeCardFilterValueProcessStep(workflowStep = "Review");
 
@@ -185,13 +206,10 @@ definition {
 
 		WorkflowMetrics.clearAllFilter();
 
-		for (var count : list "1,2,3") {
-			WorkflowMetrics.selectWorkloadByAssigneeCardFilterValue(workflowStep = "${count}Role");
-
-			Click(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_SEARCH_ASSIGNEE_NAME");
-
-			WorkflowMetrics.viewWorkloadByAssigneeSingleApprover(assigneeName = "${count}user user${count}");
-		}
+		WorkflowMetrics.viewWorkloadByAssigneeSingleApprover(
+				assigneeName = "3user user3",
+				isNotPresent = "somethingelse",
+				isPresent = "1user user1,2user user2,3user user3");
 	}
 
 	@description = "Verify if the default filter values are correct and if the chart is displayed (LPS-98001)"
