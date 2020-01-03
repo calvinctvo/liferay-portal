@@ -487,6 +487,7 @@ definition {
 =======
 	macro viewWorkloadByAssigneeSingleApprover {
 		var key_assigneeName = "${assigneeName}";
+<<<<<<< HEAD
 		var key_overdueTaskCount = "${overdueTaskCount}";
 		var key_onTimeTaskCount = "${onTimeTaskCount}";
 		var key_totalPendingTaskCount = "${totalPendingTaskCount}";
@@ -494,22 +495,29 @@ definition {
 =======
 		var key_rowNumber = "${rowNumber}";
 >>>>>>> LRQA-53633 Update macro Remove whitespace
+=======
+		var key_count = ${count};
+		var key_assigneeNotPresent = 1 + ${count};
+>>>>>>> LRQA-53633 update macro, fix viewWorkloadByAssigneeSingleApprover so it will check for expected present element and not present element
 
-		AssertTextEquals(
-			locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_NAME_TABLE",
-			value1 = "${assigneeName}");
+		for (var isInstancePresent : list "${isPresent}") {
+			var key_instanceInfo = "${isInstancePresent}";
 
-		AssertTextEquals(
-			locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_TASKCOUNT_OVERDUE",
-			value1 = "${overdueTaskCount}");
+			AssertElementPresent(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_NAME_TABLE");
 
-		AssertTextEquals(
-			locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_TASKCOUNT_ON_TIME",
-			value1 = "${onTimeTaskCount}");
+			AssertElementPresent(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_TASKCOUNT_OVERDUE");
 
-		AssertTextEquals(
-			locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_TASKCOUNT_TOTAL_PENDING",
-			value1 = "${totalPendingTaskCount}");
+			AssertElementPresent(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_TASKCOUNT_ON_TIME");
+
+			AssertElementPresent(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_TASKCOUNT_ON_TIME");
+
+		}
+
+		for (var isAssigneeNotPresent : list "${isNotPresent}") {
+			var key_assigneeNotPresent = "${isAssigneeNotPresent}";
+
+			AssertElementNotPresent(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_NAME_TABLE");
+		}
 	}
 
 	macro clearAllFilter {
