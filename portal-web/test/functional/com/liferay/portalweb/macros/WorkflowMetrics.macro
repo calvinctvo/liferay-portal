@@ -490,6 +490,10 @@ definition {
 		var key_overdueTaskCount = "${overdueTaskCount}";
 		var key_onTimeTaskCount = "${onTimeTaskCount}";
 		var key_totalPendingTaskCount = "${totalPendingTaskCount}";
+<<<<<<< HEAD
+=======
+		var key_rowNumber = "${rowNumber}";
+>>>>>>> LRQA-53633 Update macro Remove whitespace
 
 		AssertTextEquals(
 			locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_NAME_TABLE",
