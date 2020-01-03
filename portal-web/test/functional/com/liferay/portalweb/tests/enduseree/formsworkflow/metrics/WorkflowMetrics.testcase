@@ -552,6 +552,7 @@ definition {
 			tabName = "Total");
 	}
 
+<<<<<<< HEAD
 	@description = "LRQA-53630 Automate LPS-98518: [Dashboard] View workload distribution for all assignees"
 	@priority = "5"
 	test ViewWorkloadByAssigneePage {
@@ -604,6 +605,100 @@ definition {
 			isNotPresent = "1user user1,2user user2",
 			isPresent = "Blogs Entry Title 3",
 			taskName = "Review");
+=======
+	@description = "See process item detail page(LRQA-53662)"
+	@priority = "5"
+	test ViewSingleApprover {
+
+		ProductMenu.gotoPortlet(
+			category = "Workflow",
+			panel = "Control Panel",
+			portlet = "Process Builder");
+
+		Navigator.gotoNavItem(navItem = "Configuration");
+
+		Workflow.configureWorkflow(
+			workflowDefinition = "Single Approver",
+			workflowResourceValue = "Blogs Entry");
+
+		ProductMenu.gotoPortlet(
+			category = "Content &amp; Data",
+			panel = "Site Administration",
+			portlet = "Blogs");
+		
+		for (var count : list "1,2,3") {
+			BlogsNavigator.gotoAddEntry();
+
+			BlogsEntry.addEntryContent(
+			entryTitle = "Test ${count}",
+			entryContent = "test content ${count}");
+
+			Click(
+			locator1 = "Button#SUBMIT_FOR_PUBLICATION",
+			value1 = "Submit for Publication");
+		}
+
+		WorkflowMetrics.executeWorkflowScript(scriptName = "addUsersWithRoles.groovy");
+		
+
+		UserBar.gotoDropdownItem(dropdownItem = "My Workflow Tasks");
+
+		Navigator.gotoNavTab(navTab = "Assigned to My Roles");
+
+		Workflow.assignTaskToUser(
+			assetTitle = "Test 1",
+			assetType = "Blogs Entry",
+			assigneeName = "1user user1",
+			workflowTask = "Review");
+
+		Workflow.assignTaskToUser(
+			assetTitle = "Test 2",
+			assetType = "Blogs Entry",
+			assigneeName = "2user user2",
+			workflowTask = "Review");
+
+		Workflow.assignTaskToUser(
+			assetTitle = "Test 3",
+			assetType = "Blogs Entry",
+			assigneeName = "3user user3",
+			workflowTask = "Review");
+		
+		ProductMenu.gotoPortlet(
+			category = "Workflow",
+			panel = "Control Panel",
+			portlet = "Metrics");
+
+		WorkflowMetrics.goToWorkflowProcessMetrics(workflowProcessName = "Single Approver");
+
+		Click(
+			key_assigneesNumber = "3",
+			locator1 = "WorkflowMetrics#METRICS_PERFORMANCE_BY_ASSIGNEE_CARD_VIEW_ALL_ASSIGNEES_LINK");
+
+		for (var count : list "1,2,3"){
+			WorkflowMetrics.selectWorkloadByAssigneeCardFilterValue(workflowStep = "${count}Role");
+
+			Click(
+				locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_SEARCH_ASSIGNEE_NAME");
+
+			WorkflowMetrics.viewWorkloadByAssigneeSingleApprover(
+				assigneeName = "${count}user user${count}",
+				overdueTaskCount = "0",
+				onTimeTaskCount = "0",
+				totalPendingTaskCount = "1");
+		}
+		
+		WorkflowMetrics.selectWorkloadByAssigneeCardFilterValue(workflowStep = "Review");
+
+		Click(
+				locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_SEARCH_ASSIGNEE_NAME");
+
+		WorkflowMetrics.selectWorkloadByAssigneeCardFilterValue(workflowStep = "Update");
+
+		WorkflowMetrics.searchForAssigneeName(
+			assigneeName = "something else");
+
+		WorkflowMetrics.clearAllFilter();
+>>>>>>> LRQA-53633 Add new paths:Process Step Path, Task count overdue, task count on time, task count total pending
 	}
 
 }

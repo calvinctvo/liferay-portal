@@ -476,6 +476,7 @@ definition {
 			value1 = "${taskCount}");
 	}
 
+<<<<<<< HEAD
 	macro viewWorkloadByAssigneePage {
 		var key_taskCount = "${taskCount}";
 		var key_assigneeName = "${assigneeName}";
@@ -483,6 +484,52 @@ definition {
 		AssertElementPresent(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_PAGE_NAME");
 
 		AssertElementPresent(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_PAGE_TASKCOUNT");
+=======
+	macro viewWorkloadByAssigneeSingleApprover {
+		var key_assigneeName = "${assigneeName}";
+		var key_overdueTaskCount = "${overdueTaskCount}";
+		var key_onTimeTaskCount = "${onTimeTaskCount}";
+		var key_totalPendingTaskCount = "${totalPendingTaskCount}";
+
+		AssertTextEquals(
+			locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_NAME_TABLE",
+			value1 = "${assigneeName}");
+
+		AssertTextEquals(
+			locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_TASKCOUNT_OVERDUE",
+			value1 = "${overdueTaskCount}");
+
+		AssertTextEquals(
+			locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_TASKCOUNT_ON_TIME",
+			value1 = "${onTimeTaskCount}");
+
+		AssertTextEquals(
+			locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_TASKCOUNT_TOTAL_PENDING",
+			value1 = "${totalPendingTaskCount}");
+	}
+
+	macro clearAllFilter {
+		Click(
+			locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_FILTER_CLEAR_ALL"
+		);
+	}
+
+	macro searchForAssigneeName {
+		var key_assigneeName = "${assigneeName}";
+
+		Click(
+			locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_SEARCH_ASSIGNEE_NAME",
+			value1 = "${assigneeName}");
+		
+		Type(
+			locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_SEARCH_ASSIGNEE_NAME",
+			value1 = "${assigneeName}");
+
+		KeyPress(
+			locator1 = "TextInput#SEARCH",
+			value1 = "\RETURN");
+		
+>>>>>>> LRQA-53633 Add new paths:Process Step Path, Task count overdue, task count on time, task count total pending
 	}
 
 }
