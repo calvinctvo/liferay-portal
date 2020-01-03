@@ -98,6 +98,118 @@ definition {
 			value1 = "${key_testSLADefinitionDays}");
 	}
 
+	@description = "Apply filter for Assignee Search(LRQA-53633)"
+	@priority = "5"
+	test ApplySearchesForAllAssignees {
+
+		ProductMenu.gotoPortlet(
+			category = "Configuration",
+			panel = "Site Administration",
+			portlet = "Workflow");
+
+		Workflow.configureWorkflow(
+			workflowDefinition = "Single Approver",
+			workflowResourceValue = "Blogs Entry");
+
+		ProductMenu.gotoPortlet(
+			category = "Content &amp; Data",
+			panel = "Site Administration",
+			portlet = "Blogs");
+
+		for (var count : list "1,2,3") {
+			BlogsNavigator.gotoAddEntry();
+
+			BlogsEntry.addEntryContent(
+				entryContent = "test content ${count}",
+				entryTitle = "Test ${count}");
+
+			Click(
+				locator1 = "Button#SUBMIT_FOR_PUBLICATION",
+				value1 = "Submit for Publication");
+		}
+
+		WorkflowMetrics.executeWorkflowScript(scriptName = "addUsersWithRoles.groovy");
+
+		UserBar.gotoDropdownItem(dropdownItem = "My Workflow Tasks");
+
+		Navigator.gotoNavTab(navTab = "Assigned to My Roles");
+
+		Workflow.assignTaskToUser(
+			assetTitle = "Test 1",
+			assetType = "Blogs Entry",
+			assigneeName = "1user user1",
+			workflowTask = "Review");
+
+		Workflow.assignTaskToUser(
+			assetTitle = "Test 2",
+			assetType = "Blogs Entry",
+			assigneeName = "2user user2",
+			workflowTask = "Review");
+
+		Workflow.assignTaskToUser(
+			assetTitle = "Test 3",
+			assetType = "Blogs Entry",
+			assigneeName = "3user user3",
+			workflowTask = "Review");
+
+		ProductMenu.gotoPortlet(
+			category = "Workflow",
+			panel = "Control Panel",
+			portlet = "Metrics");
+
+		WorkflowMetrics.goToWorkflowProcessMetrics(workflowProcessName = "Single Approver");
+
+		Click(
+			key_assigneesNumber = "3",
+			locator1 = "WorkflowMetrics#METRICS_PERFORMANCE_BY_ASSIGNEE_CARD_VIEW_ALL_ASSIGNEES_LINK");
+
+		WorkflowMetrics.selectWorkloadByAssigneeCardFilterValue(workflowStep = "1Role");
+
+		Click(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_SEARCH_ASSIGNEE_NAME");
+
+		WorkflowMetrics.viewWorkloadByAssigneeSingleApprover(
+			assigneeName = "1user user1",
+			isNotPresent = "2user user2,3user user3",
+			isPresent = "1user user1");
+
+		WorkflowMetrics.selectWorkloadByAssigneeCardFilterValue(workflowStep = "2Role");
+
+		Click(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_SEARCH_ASSIGNEE_NAME");
+
+		WorkflowMetrics.viewWorkloadByAssigneeSingleApprover(
+			assigneeName = "2user user2",
+			isNotPresent = "3user user3",
+			isPresent = "1user user1,2user user2");
+
+		WorkflowMetrics.selectWorkloadByAssigneeCardFilterValue(workflowStep = "3Role");
+
+		Click(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_SEARCH_ASSIGNEE_NAME");
+
+		WorkflowMetrics.viewWorkloadByAssigneeSingleApprover(
+			assigneeName = "3user user3",
+			isNotPresent = "somethingelse",
+			isPresent = "1user user1,2user user2,3user user3");
+
+		WorkflowMetrics.selectWorkloadByAssigneeCardFilterValueProcessStep(workflowStep = "Review");
+
+		Click(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_SEARCH_ASSIGNEE_NAME");
+
+		WorkflowMetrics.selectWorkloadByAssigneeCardFilterValueProcessStep(workflowStep = "Update");
+
+		WorkflowMetrics.searchForAssigneeName(assigneeName = "something else");
+
+		AssertTextEquals.assertPartialText(
+			locator1 = "Message#EMPTY_INFO",
+			value1 = "No results were found.");
+
+		WorkflowMetrics.clearAllFilter();
+
+		WorkflowMetrics.viewWorkloadByAssigneeSingleApprover(
+			assigneeName = "3user user3",
+			isNotPresent = "somethingelse",
+			isPresent = "1user user1,2user user2,3user user3");
+	}
+
 	@description = "Verify if the default filter values are correct and if the chart is displayed (LPS-98001)"
 	@priority = "5"
 	test DefaultWorkflowMetricsFilterValues {
@@ -550,120 +662,6 @@ definition {
 		WorkflowMetrics.assertWorkloadByAssigneeCardEmptyMessage(
 			emptyMessage = "There are no items assigned to users at the moment.",
 			tabName = "Total");
-	}
-
-	@description = "Apply filter for Assignee Search(LRQA-53633)"
-	@priority = "5"
-	test ApplySearchesForAllAssignees {
-
-		ProductMenu.gotoPortlet(
-			category = "Configuration",
-			panel = "Site Administration",
-			portlet = "Workflow");
-
-		Workflow.configureWorkflow(
-			workflowDefinition = "Single Approver",
-			workflowResourceValue = "Blogs Entry");
-
-		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
-			panel = "Site Administration",
-			portlet = "Blogs");
-
-		for (var count : list "1,2,3") {
-			BlogsNavigator.gotoAddEntry();
-
-			BlogsEntry.addEntryContent(
-				entryContent = "test content ${count}",
-				entryTitle = "Test ${count}");
-
-			Click(
-				locator1 = "Button#SUBMIT_FOR_PUBLICATION",
-				value1 = "Submit for Publication");
-		}
-
-		WorkflowMetrics.executeWorkflowScript(scriptName = "addUsersWithRoles.groovy");
-
-		UserBar.gotoDropdownItem(dropdownItem = "My Workflow Tasks");
-
-		Navigator.gotoNavTab(navTab = "Assigned to My Roles");
-
-		Workflow.assignTaskToUser(
-			assetTitle = "Test 1",
-			assetType = "Blogs Entry",
-			assigneeName = "1user user1",
-			workflowTask = "Review");
-
-		Workflow.assignTaskToUser(
-			assetTitle = "Test 2",
-			assetType = "Blogs Entry",
-			assigneeName = "2user user2",
-			workflowTask = "Review");
-
-		Workflow.assignTaskToUser(
-			assetTitle = "Test 3",
-			assetType = "Blogs Entry",
-			assigneeName = "3user user3",
-			workflowTask = "Review");
-
-		ProductMenu.gotoPortlet(
-			category = "Workflow",
-			panel = "Control Panel",
-			portlet = "Metrics");
-
-		WorkflowMetrics.goToWorkflowProcessMetrics(workflowProcessName = "Single Approver");
-
-		Click(
-			key_assigneesNumber = "3",
-			locator1 = "WorkflowMetrics#METRICS_PERFORMANCE_BY_ASSIGNEE_CARD_VIEW_ALL_ASSIGNEES_LINK");
-
-		
-		WorkflowMetrics.selectWorkloadByAssigneeCardFilterValue(workflowStep = "1Role");
-
-		Click(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_SEARCH_ASSIGNEE_NAME");
-
-		WorkflowMetrics.viewWorkloadByAssigneeSingleApprover(
-				assigneeName = "1user user1",
-				isNotPresent = "2user user2,3user user3",
-				isPresent = "1user user1");
-
-		WorkflowMetrics.selectWorkloadByAssigneeCardFilterValue(workflowStep = "2Role");
-
-		Click(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_SEARCH_ASSIGNEE_NAME");
-
-		WorkflowMetrics.viewWorkloadByAssigneeSingleApprover(
-				assigneeName = "2user user2",
-				isNotPresent = "3user user3",
-				isPresent = "1user user1,2user user2");
-		
-		WorkflowMetrics.selectWorkloadByAssigneeCardFilterValue(workflowStep = "3Role");
-
-		Click(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_SEARCH_ASSIGNEE_NAME");
-
-		WorkflowMetrics.viewWorkloadByAssigneeSingleApprover(
-				assigneeName = "3user user3",
-				isNotPresent = "somethingelse",
-				isPresent = "1user user1,2user user2,3user user3");
-		
-
-		WorkflowMetrics.selectWorkloadByAssigneeCardFilterValueProcessStep(workflowStep = "Review");
-
-		Click(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_SEARCH_ASSIGNEE_NAME");
-
-		WorkflowMetrics.selectWorkloadByAssigneeCardFilterValueProcessStep(workflowStep = "Update");
-
-		WorkflowMetrics.searchForAssigneeName(assigneeName = "something else");
-
-		AssertTextEquals.assertPartialText(
-			locator1 = "Message#EMPTY_INFO",
-			value1 = "No results were found.");
-
-		WorkflowMetrics.clearAllFilter();
-
-		WorkflowMetrics.viewWorkloadByAssigneeSingleApprover(
-				assigneeName = "3user user3",
-				isNotPresent = "somethingelse",
-				isPresent = "1user user1,2user user2,3user user3");
 	}
 
 }
