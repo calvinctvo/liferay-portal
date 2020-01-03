@@ -476,7 +476,6 @@ definition {
 			value1 = "${taskCount}");
 	}
 
-<<<<<<< HEAD
 	macro viewWorkloadByAssigneePage {
 		var key_taskCount = "${taskCount}";
 		var key_assigneeName = "${assigneeName}";
@@ -484,24 +483,13 @@ definition {
 		AssertElementPresent(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_PAGE_NAME");
 
 		AssertElementPresent(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_PAGE_TASKCOUNT");
-=======
+	}
+	
 	macro viewWorkloadByAssigneeSingleApprover {
 		var key_assigneeName = "${assigneeName}";
-<<<<<<< HEAD
-		var key_overdueTaskCount = "${overdueTaskCount}";
-		var key_onTimeTaskCount = "${onTimeTaskCount}";
-		var key_totalPendingTaskCount = "${totalPendingTaskCount}";
-<<<<<<< HEAD
-=======
-		var key_rowNumber = "${rowNumber}";
->>>>>>> LRQA-53633 Update macro Remove whitespace
-=======
-		var key_count = ${count};
-		var key_assigneeNotPresent = 1 + ${count};
->>>>>>> LRQA-53633 update macro, fix viewWorkloadByAssigneeSingleApprover so it will check for expected present element and not present element
 
 		for (var isInstancePresent : list "${isPresent}") {
-			var key_instanceInfo = "${isInstancePresent}";
+			var key_assigneeName = "${isInstancePresent}";
 
 			AssertElementPresent(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_NAME_TABLE");
 
@@ -514,7 +502,7 @@ definition {
 		}
 
 		for (var isAssigneeNotPresent : list "${isNotPresent}") {
-			var key_assigneeNotPresent = "${isAssigneeNotPresent}";
+			var key_assigneeName = "${isAssigneeNotPresent}";
 
 			AssertElementNotPresent(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_NAME_TABLE");
 		}
@@ -541,7 +529,14 @@ definition {
 			locator1 = "TextInput#SEARCH",
 			value1 = "\RETURN");
 		
->>>>>>> LRQA-53633 Add new paths:Process Step Path, Task count overdue, task count on time, task count total pending
+	}
+
+	macro selectWorkloadByAssigneeCardFilterValueProcessStep {
+		var key_workflowStep = "${workflowStep}";
+
+		Click(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_CARD_FILTER_PROCESS_STEP");
+
+		Click(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_CARD_FILTER_OPTION");
 	}
 
 }
