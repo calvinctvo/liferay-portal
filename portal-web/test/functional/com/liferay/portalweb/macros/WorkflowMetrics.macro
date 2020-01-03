@@ -63,6 +63,10 @@ definition {
 			value1 = "${emptyMessage}");
 	}
 
+	macro clearAllFilter {
+		Click(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_FILTER_CLEAR_ALL");
+	}
+
 	macro createUsersAndAssignInstances {
 		WorkflowMetrics.executeWorkflowScript(scriptName = "addUsersWithRoles.groovy");
 
@@ -206,6 +210,22 @@ definition {
 		Click(locator1 = "WorkflowMetricsSLA#METRICS_SLA_SETTINGS");
 	}
 
+	macro searchForAssigneeName {
+		var key_assigneeName = "${assigneeName}";
+
+		Click(
+			locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_SEARCH_ASSIGNEE_NAME",
+			value1 = "${assigneeName}");
+
+		Type(
+			locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_SEARCH_ASSIGNEE_NAME",
+			value1 = "${assigneeName}");
+
+		KeyPress(
+			locator1 = "TextInput#SEARCH",
+			value1 = "\RETURN");
+	}
+
 	macro selectDateRange {
 		var key_completionVelocityDateRange = "${selectVelocityDateRange}";
 		var key_endDateRange = "${endDateRange}";
@@ -238,6 +258,14 @@ definition {
 		var key_workflowStep = "${workflowStep}";
 
 		Click(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_CARD_FILTER");
+
+		Click(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_CARD_FILTER_OPTION");
+	}
+
+	macro selectWorkloadByAssigneeCardFilterValueProcessStep {
+		var key_workflowStep = "${workflowStep}";
+
+		Click(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_CARD_FILTER_PROCESS_STEP");
 
 		Click(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_CARD_FILTER_OPTION");
 	}
@@ -484,7 +512,7 @@ definition {
 
 		AssertElementPresent(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_PAGE_TASKCOUNT");
 	}
-	
+
 	macro viewWorkloadByAssigneeSingleApprover {
 		var key_assigneeName = "${assigneeName}";
 
@@ -506,37 +534,6 @@ definition {
 
 			AssertElementNotPresent(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_NAME_TABLE");
 		}
-	}
-
-	macro clearAllFilter {
-		Click(
-			locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_FILTER_CLEAR_ALL"
-		);
-	}
-
-	macro searchForAssigneeName {
-		var key_assigneeName = "${assigneeName}";
-
-		Click(
-			locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_SEARCH_ASSIGNEE_NAME",
-			value1 = "${assigneeName}");
-		
-		Type(
-			locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_SEARCH_ASSIGNEE_NAME",
-			value1 = "${assigneeName}");
-
-		KeyPress(
-			locator1 = "TextInput#SEARCH",
-			value1 = "\RETURN");
-		
-	}
-
-	macro selectWorkloadByAssigneeCardFilterValueProcessStep {
-		var key_workflowStep = "${workflowStep}";
-
-		Click(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_CARD_FILTER_PROCESS_STEP");
-
-		Click(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_CARD_FILTER_OPTION");
 	}
 
 }
