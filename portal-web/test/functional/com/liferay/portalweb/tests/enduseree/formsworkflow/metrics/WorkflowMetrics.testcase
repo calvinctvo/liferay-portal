@@ -167,34 +167,59 @@ definition {
 
 		Click(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_SEARCH_ASSIGNEE_NAME");
 
-		WorkflowMetrics.viewWorkloadByAssigneeSingleApprover(
+		WorkflowMetrics.viewWorkloadByAssignee(
 			assigneeName = "1user user1",
 			isNotPresent = "2user user2,3user user3",
-			isPresent = "1user user1");
+			overdueTaskCount = "0",
+			onTimeTaskCount = "0",
+			totalPendingTaskCount = "1");
 
 		WorkflowMetrics.selectWorkloadByAssigneeCardFilterValue(workflowStep = "2Role");
 
 		Click(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_SEARCH_ASSIGNEE_NAME");
 
-		WorkflowMetrics.viewWorkloadByAssigneeSingleApprover(
+		WorkflowMetrics.viewWorkloadByAssignee(
 			assigneeName = "2user user2",
 			isNotPresent = "3user user3",
-			isPresent = "1user user1,2user user2");
+			overdueTaskCount = "0",
+			onTimeTaskCount = "0",
+			totalPendingTaskCount = "1");
 
 		WorkflowMetrics.selectWorkloadByAssigneeCardFilterValue(workflowStep = "3Role");
 
 		Click(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_SEARCH_ASSIGNEE_NAME");
 
-		WorkflowMetrics.viewWorkloadByAssigneeSingleApprover(
+		WorkflowMetrics.viewWorkloadByAssignee(
 			assigneeName = "3user user3",
 			isNotPresent = "somethingelse",
-			isPresent = "1user user1,2user user2,3user user3");
+			overdueTaskCount = "0",
+			onTimeTaskCount = "0",
+			totalPendingTaskCount = "1");
+
+		WorkflowMetrics.clearAllFilter();
+
+		WorkflowMetrics.selectWorkloadByAssigneeCardFilterValueProcessStep(workflowStep = "Review");
+
+		WorkflowMetrics.searchForAssigneeName(assigneeName = "1user");
+
+		WorkflowMetrics.viewWorkloadByAssignee(
+			assigneeName = "1user user1",
+			isNotPresent = "2user user2,3user user3",
+			overdueTaskCount = "0",
+			onTimeTaskCount = "0",
+			totalPendingTaskCount = "1");
 
 		WorkflowMetrics.selectWorkloadByAssigneeCardFilterValueProcessStep(workflowStep = "Review");
 
 		Click(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_SEARCH_ASSIGNEE_NAME");
 
 		WorkflowMetrics.selectWorkloadByAssigneeCardFilterValueProcessStep(workflowStep = "Update");
+
+		Click(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_SEARCH_ASSIGNEE_NAME");
+
+		AssertTextEquals.assertPartialText(
+			locator1 = "Message#EMPTY_INFO",
+			value1 = "No results were found.");
 
 		WorkflowMetrics.searchForAssigneeName(assigneeName = "something else");
 
@@ -204,10 +229,12 @@ definition {
 
 		WorkflowMetrics.clearAllFilter();
 
-		WorkflowMetrics.viewWorkloadByAssigneeSingleApprover(
-			assigneeName = "3user user3",
+		WorkflowMetrics.viewWorkloadByAssignee(
+			assigneeName = "1user user1",
 			isNotPresent = "somethingelse",
-			isPresent = "1user user1,2user user2,3user user3");
+			overdueTaskCount = "0",
+			onTimeTaskCount = "0",
+			totalPendingTaskCount = "1");
 	}
 
 	@description = "Verify if the default filter values are correct and if the chart is displayed (LPS-98001)"
