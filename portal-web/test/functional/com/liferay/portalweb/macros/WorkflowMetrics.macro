@@ -513,21 +513,27 @@ definition {
 		AssertElementPresent(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_PAGE_TASKCOUNT");
 	}
 
-	macro viewWorkloadByAssigneeSingleApprover {
+	macro viewWorkloadByAssignee {
 		var key_assigneeName = "${assigneeName}";
+		var key_overdueTaskCount = "${overdueTaskCount}";
+		var key_onTimeTaskCount = "${onTimeTaskCount}";
+		var key_totalPendingTaskCount = "${totalPendingTaskCount}";
 
-		for (var isInstancePresent : list "${isPresent}") {
-			var key_assigneeName = "${isInstancePresent}";
+			AssertTextEquals(
+			locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_NAME_TABLE",
+			value1 = "${assigneeName}");
 
-			AssertElementPresent(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_NAME_TABLE");
+			AssertTextEquals(
+			locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_TASKCOUNT_OVERDUE",
+			value1 = "${overdueTaskCount}");
 
-			AssertElementPresent(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_TASKCOUNT_OVERDUE");
+			AssertTextEquals(
+			locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_TASKCOUNT_ON_TIME",
+			value1 = "${onTimeTaskCount}");
 
-			AssertElementPresent(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_TASKCOUNT_ON_TIME");
-
-			AssertElementPresent(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_TASKCOUNT_ON_TIME");
-
-		}
+			AssertTextEquals(
+			locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_TASKCOUNT_TOTAL_PENDING",
+			value1 = "${totalPendingTaskCount}");
 
 		for (var isAssigneeNotPresent : list "${isNotPresent}") {
 			var key_assigneeName = "${isAssigneeNotPresent}";
