@@ -309,16 +309,6 @@
 	<td>//li[3]//button[contains(@class, 'btn-secondary')]</td>
 	<td></td>
 </tr>
-<tr>
-	<td>METRICS_WORKLOAD_BY_ASSIGNEE_ALL_ITEMS</td>
-	<td>//div[contains(text(),'Single Approver: All Items')]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>METRICS_BACK_ARROW</td>
-	<td>//span[@class='icon-monospaced']</td>
-	<td></td>
-</tr>
 </tbody>
 </table>
 </body>
