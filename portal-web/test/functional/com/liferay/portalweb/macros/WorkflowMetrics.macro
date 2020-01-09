@@ -251,22 +251,6 @@ definition {
 		Click(locator1 = "WorkflowMetricsSLA#METRICS_SLA_SETTINGS");
 	}
 
-	macro searchForAssigneeName {
-		var key_assigneeName = "${assigneeName}";
-
-		Click(
-			locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_SEARCH_ASSIGNEE_NAME",
-			value1 = "${assigneeName}");
-
-		Type(
-			locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_SEARCH_ASSIGNEE_NAME",
-			value1 = "${assigneeName}");
-
-		KeyPress(
-			locator1 = "TextInput#SEARCH",
-			value1 = "\RETURN");
-	}
-
 	macro selectDateRange {
 		var key_completionVelocityDateRange = "${selectVelocityDateRange}";
 		var key_endDateRange = "${endDateRange}";
@@ -590,16 +574,6 @@ definition {
 		Click(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_FILTER_CLEAR_ALL");
 	}
 
-<<<<<<< Updated upstream
-=======
-	macro selectWorkloadByAssigneeCardFilterValueProcessStep {
-		var key_workflowStep = "${workflowStep}";
-
-		Click(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_CARD_FILTER_PROCESS_STEP");
-
-		Click(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_CARD_FILTER_OPTION");
-	}
-
 	macro searchForAssigneeName {
 		var key_assigneeName = "${assigneeName}";
 
@@ -616,7 +590,6 @@ definition {
 			value1 = "\RETURN");
 	}
 
->>>>>>> Stashed changes
 	macro viewUserWorkloadByStepOnAllItems {
 		var key_assigneeName = "${assigneeName}";
 		var key_taskName = "${taskName}";
