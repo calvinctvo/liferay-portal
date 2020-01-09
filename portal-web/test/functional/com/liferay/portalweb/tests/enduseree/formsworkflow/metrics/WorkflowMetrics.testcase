@@ -100,6 +100,88 @@ definition {
 			value1 = "${key_testSLADefinitionDays}");
 	}
 
+	@description = "Apply filter for workload distribution for all assignees(LRQA-53632)"
+	@priority = "5"
+	test ApplyFilterForWorkloadDistribution {
+
+		ProductMenu.gotoPortlet(
+			category = "Configuration",
+			panel = "Site Administration",
+			portlet = "Workflow");
+
+		Workflow.configureWorkflow(
+			workflowDefinition = "Single Approver",
+			workflowResourceValue = "Blogs Entry");
+
+		ProductMenu.gotoPortlet(
+			category = "Workflow",
+			panel = "Control Panel",
+			portlet = "Metrics");
+
+		WorkflowMetrics.create6UsersAndAssign();
+
+		WorkflowMetrics.goToWorkflowProcessMetrics(workflowProcessName = "Single Approver");
+
+		Click(
+			key_assigneesNumber = "6",
+			locator1 = "WorkflowMetrics#METRICS_PERFORMANCE_BY_ASSIGNEE_CARD_VIEW_ALL_ASSIGNEES_LINK");
+
+		WorkflowMetrics.selectWorkloadByAssigneeCardFilterValue(workflowStep = "1Role");
+
+		Click(
+			key_assigneeName = "1user user1",
+			locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_NAME_TABLE");
+
+		WorkflowMetrics.verifyFiltersFromDashboard(isFilterOptionPresent = "Pending,1user user1");
+
+		Navigator.gotoBack();
+
+		Click(
+			assigneeName = "1user user1",
+			locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_TASKCOUNT_OVERDUE");
+
+		WorkflowMetrics.verifyFiltersFromDashboard(isFilterOptionPresent = "Pending,1user user1,Overdue");
+
+		Navigator.gotoBack();
+
+		Click(
+			assigneeName = "1user user1",
+			locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_TASKCOUNT_ON_TIME");
+
+		WorkflowMetrics.verifyFiltersFromDashboard(isFilterOptionPresent = "Pending,1user user1,On Time");
+
+		Navigator.gotoBack();
+
+		Click(
+			assigneeName = "1user user1",
+			locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_TASKCOUNT_TOTAL_PENDING");
+
+		WorkflowMetrics.verifyFiltersFromDashboard(isFilterOptionPresent = "Pending,1user user1");
+
+		Navigator.gotoBack();
+
+		WorkflowMetrics.clearAllFilter();
+
+		WorkflowMetrics.applyRoleFilterToAssignee();
+
+		AnnouncementsPortlet.configurePaginationCP(itemsPerPage = "5");
+
+		WorkflowMetrics.selectWorkloadByAssigneeCardFilterValueProcessStep(workflowStep = "Review");
+
+		Click(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_SEARCH_ASSIGNEE_NAME");
+
+		Click(locator1 = "Pagination#NEXT_LINK");
+
+		WorkflowMetrics.viewWorkloadByAssignee(
+			assigneeName = "6user user6",
+			isNotPresent = "1user user1,2user user2,3user user3,4user user4,5user user5",
+			onTimeTaskCount = "0",
+			overdueTaskCount = "0",
+			totalPendingTaskCount = "1");
+
+		WorkflowMetrics.clearAllFilter();
+	}
+
 	@description = "LRQA-53633 Automate LPS-103368: [Dashboard] Apply searches in the workload distribution for all assignees"
 	@priority = "5"
 	test ApplySearchesForAllAssignees {
@@ -870,107 +952,6 @@ definition {
 			isNotPresent = "1user user1,2user user2",
 			isPresent = "Blogs Entry Title 3",
 			taskName = "Review");
-	}
-
-	@description = "Apply filter for workload distribution for all assignees(LRQA-53632)"
-	@priority = "5"
-	test ApplyFilterForWorkloadDistribution {
-
-		ProductMenu.gotoPortlet(
-			category = "Configuration",
-			panel = "Site Administration",
-			portlet = "Workflow");
-
-		Workflow.configureWorkflow(
-			workflowDefinition = "Single Approver",
-			workflowResourceValue = "Blogs Entry");
-
-		ProductMenu.gotoPortlet(
-			category = "Workflow",
-			panel = "Control Panel",
-			portlet = "Metrics");
-
-		WorkflowMetrics.create6UsersAndAssign();
-
-		WorkflowMetrics.goToWorkflowProcessMetrics(workflowProcessName = "Single Approver");
-
-		Click(
-			key_assigneesNumber = "6",
-			locator1 = "WorkflowMetrics#METRICS_PERFORMANCE_BY_ASSIGNEE_CARD_VIEW_ALL_ASSIGNEES_LINK");
-
-		AssertElementPresent(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_CARD_FILTER");
-
-		WorkflowMetrics.selectWorkloadByAssigneeCardFilterValue(workflowStep = "1Role");
-
-		Click(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_SEARCH_ASSIGNEE_NAME");
-
-		Click(
-			key_assigneeName = "1user user1",
-			locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_NAME_TABLE");
-
-		AssertElementPresent(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_ALL_ITEMS");
-
-		WorkflowMetrics.verifyFiltersFromDashboard(isFilterOptionPresent = "Pending,1user user1");
-
-		Click(locator1 = "WorkflowMetrics#METRICS_BACK_ARROW");
-
-		Click(
-			assigneeName = "1user user1",
-			locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_TASKCOUNT_OVERDUE");
-
-		AssertElementPresent(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_ALL_ITEMS");
-
-		WorkflowMetrics.verifyFiltersFromDashboard(isFilterOptionPresent = "Pending,1user user1,Overdue");
-
-		Click(locator1 = "WorkflowMetrics#METRICS_BACK_ARROW");
-
-		Click(
-			assigneeName = "1user user1",
-			locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_TASKCOUNT_ON_TIME");
-
-		AssertElementPresent(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_ALL_ITEMS");
-
-		WorkflowMetrics.verifyFiltersFromDashboard(isFilterOptionPresent = "Pending,1user user1,On Time");
-
-		Click(locator1 = "WorkflowMetrics#METRICS_BACK_ARROW");
-
-		Click(
-			assigneeName = "1user user1",
-			locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_TASKCOUNT_TOTAL_PENDING");
-		Click( locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_NAME_TABLE",
-			   key_assigneeName = "1user user1");
-
-		AssertElementPresent(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_ALL_ITEMS");
-
-		WorkflowMetrics.verifyFiltersFromDashboard(isFilterOptionPresent = "Pending,1user user1");
-
-		Click(locator1 = "WorkflowMetrics#METRICS_BACK_ARROW");
-
-		WorkflowMetrics.clearAllFilter();
-
-		WorkflowMetrics.applyRoleFilterToAssignee();
-
-		Click(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_SEARCH_ASSIGNEE_NAME");
-
-		AnnouncementsPortlet.configurePaginationCP(itemsPerPage = "5");
-
-		WorkflowMetrics.selectWorkloadByAssigneeCardFilterValueProcessStep(workflowStep = "Review");
-
-		Click(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_SEARCH_ASSIGNEE_NAME");
-
-		Click(locator1 = "Pagination#NEXT_LINK");
-
-		WorkflowMetrics.viewWorkloadByAssignee(
-			assigneeName = "6user user6",
-			isNotPresent = "1user user1,2user user2,3user user3,4user user4,5user user5",
-			overdueTaskCount = "0",
-			onTimeTaskCount = "0",
-			totalPendingTaskCount = "1");
-
-		Click(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_SEARCH_ASSIGNEE_NAME");
-
-		WorkflowMetrics.clearAllFilter();
-
 	}
 
 }
