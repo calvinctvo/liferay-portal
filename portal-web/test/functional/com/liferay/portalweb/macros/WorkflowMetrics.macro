@@ -23,6 +23,34 @@ definition {
 		Click(locator1 = "WorkflowAllItems#WORKFLOW_ALL_ITEMS_FILTER_TITLE");
 	}
 
+	macro applyRoleFilterToAssignee {
+		WorkflowMetrics.selectWorkloadByAssigneeCardFilterValue(workflowStep = "1Role");
+
+		WorkflowMetrics.viewWorkloadByAssignee(
+			assigneeName = "1user user1",
+			isNotPresent = "2user user2,3user user3,4user user4,5user user5,6user user6",
+			onTimeTaskCount = "0",
+			overdueTaskCount = "0",
+			totalPendingTaskCount = "1");
+
+		WorkflowMetrics.selectWorkloadByAssigneeCardFilterValue(workflowStep = "2Role");
+
+		WorkflowMetrics.viewWorkloadByAssignee(
+			assigneeName = "2user user2",
+			isNotPresent = "3user user3,4user user4,5user user5,6user user6",
+			onTimeTaskCount = "0",
+			overdueTaskCount = "0",
+			totalPendingTaskCount = "1");
+
+		WorkflowMetrics.selectWorkloadByAssigneeCardFilterValue(workflowStep = "3Role");
+
+		WorkflowMetrics.selectWorkloadByAssigneeCardFilterValue(workflowStep = "4Role");
+
+		WorkflowMetrics.selectWorkloadByAssigneeCardFilterValue(workflowStep = "5Role");
+
+		WorkflowMetrics.selectWorkloadByAssigneeCardFilterValue(workflowStep = "6Role");
+	}
+
 	macro assertAllItemsValues {
 
 		var key_assigneeName = "${assigneeName}";
@@ -109,6 +137,23 @@ definition {
 
 	macro clearAllFilter {
 		Click(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_FILTER_CLEAR_ALL");
+	}
+
+	macro create6UsersAndAssign {
+		ProductMenu.gotoPortlet(
+			category = "Content &amp; Data",
+			panel = "Site Administration",
+			portlet = "Blogs");
+
+		for (var count : list "1,2,3,4,5,6") {
+			JSONBlog.addEntry(
+				entryContent = "Blogs Entry ${count} Content",
+				entryTitle = "Blogs Entry Title ${count}");
+		}
+
+		WorkflowMetrics.executeWorkflowScript(scriptName = "add6UsersWithRoles.groovy");
+
+		WorkflowMetrics.executeWorkflowScript(scriptName = "assignOpenTasksToUsers.groovy");
 	}
 
 	macro createUsersAndAssignInstances {
@@ -321,7 +366,7 @@ definition {
 
 	macro selectWorkloadByAssigneeCardFilterValue {
 		var key_workflowStep = "${workflowStep}";
-		
+
 		Click(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_CARD_FILTER");
 
 		Click(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_CARD_FILTER_OPTION");
@@ -641,6 +686,29 @@ definition {
 		AssertElementPresent(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_PAGE_TASKCOUNT");
 	}
 
+	macro viewWorkloadByAssigneeSingleApprover {
+		var key_assigneeName = "${assigneeName}";
+
+		for (var isInstancePresent : list "${isPresent}") {
+			var key_assigneeName = "${isInstancePresent}";
+
+			AssertElementPresent(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_NAME_TABLE");
+
+			AssertElementPresent(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_TASKCOUNT_OVERDUE");
+
+			AssertElementPresent(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_TASKCOUNT_ON_TIME");
+
+			AssertElementPresent(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_TASKCOUNT_ON_TIME");
+
+		}
+
+		for (var isAssigneeNotPresent : list "${isNotPresent}") {
+			var key_assigneeName = "${isAssigneeNotPresent}";
+
+			AssertElementNotPresent(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_NAME_TABLE");
+		}
+	}
+
 	macro waitForCompletedSLAtoBecomeOverdue {
 		var count = "0";
 
@@ -678,124 +746,6 @@ definition {
 		if ("${count}" == "${timesToRun}") {
 			echo("timeout exceeded");
 		}
-	}
-
-	macro viewWorkloadByAssigneeSingleApprover {
-		var key_assigneeName = "${assigneeName}";
-
-		for (var isInstancePresent : list "${isPresent}") {
-			var key_assigneeName = "${isInstancePresent}";
-
-			AssertElementPresent(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_NAME_TABLE");
-
-			AssertElementPresent(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_TASKCOUNT_OVERDUE");
-
-			AssertElementPresent(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_TASKCOUNT_ON_TIME");
-
-			AssertElementPresent(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_TASKCOUNT_ON_TIME");
-
-		}
-
-		for (var isAssigneeNotPresent : list "${isNotPresent}") {
-			var key_assigneeName = "${isAssigneeNotPresent}";
-
-			AssertElementNotPresent(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_NAME_TABLE");
-		}
-	}
-
-	macro clearAllFilter {
-		Click(
-			locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_FILTER_CLEAR_ALL"
-		);
-	}
-
-	macro searchForAssigneeName {
-		var key_assigneeName = "${assigneeName}";
-
-		Click(
-			locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_SEARCH_ASSIGNEE_NAME",
-			value1 = "${assigneeName}");
-
-		Type(
-			locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_SEARCH_ASSIGNEE_NAME",
-			value1 = "${assigneeName}");
-
-		KeyPress(
-			locator1 = "TextInput#SEARCH",
-			value1 = "\RETURN");
-
-	}
-
-	macro selectWorkloadByAssigneeCardFilterValueProcessStep {
-		var key_workflowStep = "${workflowStep}";
-
-		Click(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_CARD_FILTER_PROCESS_STEP");
-
-		Click(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_CARD_FILTER_OPTION");
-	}
-
-	macro create6UsersAndAssign {
-		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
-			panel = "Site Administration",
-			portlet = "Blogs");
-
-		for (var count : list "1,2,3,4,5,6") {
-			JSONBlog.addEntry(
-				entryContent = "Blogs Entry ${count} Content",
-				entryTitle = "Blogs Entry Title ${count}");
-		}
-
-		WorkflowMetrics.executeWorkflowScript(scriptName = "add6UsersWithRoles.groovy");
-
-		UserBar.gotoDropdownItem(dropdownItem = "My Workflow Tasks");
-
-		Navigator.gotoNavTab(navTab = "Assigned to My Roles");
-
-		for (var count : list "1,2,3,4,5,6") {
-			Workflow.assignTaskToUser(
-			assetTitle = "Test ${count}",
-			assetType = "Blogs Entry",
-			assigneeName = "${count}user user${count}",
-			workflowTask = "Review");
-		}
-	}
-
-	macro applyRoleFilterToAssignee{
-		WorkflowMetrics.selectWorkloadByAssigneeCardFilterValue(workflowStep = "1Role");
-
-		Click(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_SEARCH_ASSIGNEE_NAME");
-
-		WorkflowMetrics.viewWorkloadByAssigneeSingleApprover(
-				assigneeName = "1user user1",
-				isNotPresent = "2user user2,3user user3,4user user4,5user user5,6user user6",
-				isPresent = "1user user1");
-
-		WorkflowMetrics.selectWorkloadByAssigneeCardFilterValue(workflowStep = "2Role");
-
-		Click(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_SEARCH_ASSIGNEE_NAME");
-
-		WorkflowMetrics.viewWorkloadByAssigneeSingleApprover(
-				assigneeName = "2user user2",
-				isNotPresent = "3user user3,4user user4,5user user5,6user user6",
-				isPresent = "1user user1,2user user2");
-		
-		WorkflowMetrics.selectWorkloadByAssigneeCardFilterValue(workflowStep = "3Role");
-
-		Click(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_SEARCH_ASSIGNEE_NAME");
-		
-		WorkflowMetrics.selectWorkloadByAssigneeCardFilterValue(workflowStep = "4Role");
-
-		Click(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_SEARCH_ASSIGNEE_NAME");
-
-		WorkflowMetrics.selectWorkloadByAssigneeCardFilterValue(workflowStep = "5Role");
-
-		Click(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_SEARCH_ASSIGNEE_NAME");
-
-		WorkflowMetrics.selectWorkloadByAssigneeCardFilterValue(workflowStep = "6Role");
-
-		Click(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_SEARCH_ASSIGNEE_NAME");
-
 	}
 
 }
