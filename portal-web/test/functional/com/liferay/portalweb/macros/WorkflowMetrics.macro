@@ -107,10 +107,6 @@ definition {
 			value1 = "${emptyMessage}");
 	}
 
-	macro clearAllFilter {
-		Click(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_FILTER_CLEAR_ALL");
-	}
-
 	macro createUsersAndAssignInstances {
 		var iterator = "1";
 		var numberOfBlogInstances = MathUtil.sum("${numberOfBlogInstances}", "1");
@@ -592,30 +588,6 @@ definition {
 
 	macro clearAllFilter {
 		Click(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_FILTER_CLEAR_ALL");
-	}
-
-	macro selectWorkloadByAssigneeCardFilterValueProcessStep {
-		var key_workflowStep = "${workflowStep}";
-
-		Click(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_CARD_FILTER_PROCESS_STEP");
-
-		Click(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_CARD_FILTER_OPTION");
-	}
-
-	macro searchForAssigneeName {
-		var key_assigneeName = "${assigneeName}";
-
-		Click(
-			locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_SEARCH_ASSIGNEE_NAME",
-			value1 = "${assigneeName}");
-
-		Type(
-			locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_SEARCH_ASSIGNEE_NAME",
-			value1 = "${assigneeName}");
-
-		KeyPress(
-			locator1 = "TextInput#SEARCH",
-			value1 = "\RETURN");
 	}
 
 	macro viewUserWorkloadByStepOnAllItems {
