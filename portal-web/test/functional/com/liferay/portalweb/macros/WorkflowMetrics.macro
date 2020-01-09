@@ -566,6 +566,58 @@ definition {
 			value1 = "0min");
 	}
 
+	macro viewPerformanceByAllAssignee {
+		var key_assignee = "${assignee}";
+		var key_avgCompletionTime = "${avgCompletionTime}";
+		var key_taskCount = "${taskCount}";
+
+		AssertTextEquals(
+			locator1 = "WorkflowMetrics#METRICS_PERFORMANCE_BY_ASSIGNEE_NAME",
+			value1 = "${assignee}");
+
+		AssertTextEquals(
+			locator1 = "WorkflowMetrics#METRICS_PERFORMANCE_BY_ASSIGNEE_TASK_COUNT",
+			value1 = "${taskCount}");
+
+		AssertTextEquals(
+			locator1 = "WorkflowMetrics#METRICS_PERFORMANCE_BY_ASSIGNEE_AVG_COMPLETION_TIME",
+			value1 = "${avgCompletionTime}");
+
+		for (var isAssigneeNotPresent : list "${isNotPresent}") {
+			var key_assignee = "${isAssigneeNotPresent}";
+
+			AssertElementNotPresent(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_NAME_TABLE");
+		}
+	}
+
+	macro clearAllFilter {
+		Click(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_FILTER_CLEAR_ALL");
+	}
+
+	macro selectWorkloadByAssigneeCardFilterValueProcessStep {
+		var key_workflowStep = "${workflowStep}";
+
+		Click(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_CARD_FILTER_PROCESS_STEP");
+
+		Click(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_CARD_FILTER_OPTION");
+	}
+
+	macro searchForAssigneeName {
+		var key_assigneeName = "${assigneeName}";
+
+		Click(
+			locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_SEARCH_ASSIGNEE_NAME",
+			value1 = "${assigneeName}");
+
+		Type(
+			locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_SEARCH_ASSIGNEE_NAME",
+			value1 = "${assigneeName}");
+
+		KeyPress(
+			locator1 = "TextInput#SEARCH",
+			value1 = "\RETURN");
+	}
+
 	macro viewUserWorkloadByStepOnAllItems {
 		var key_assigneeName = "${assigneeName}";
 		var key_taskName = "${taskName}";
