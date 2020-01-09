@@ -872,4 +872,59 @@ definition {
 			taskName = "Review");
 	}
 
+	@description = "Apply filter for workload distribution for all assignees(LRQA-53632)"
+	@priority = "5"
+	test ApplyFilterForWorkloadDistribution {
+
+		ProductMenu.gotoPortlet(
+			category = "Configuration",
+			panel = "Site Administration",
+			portlet = "Workflow");
+
+		Workflow.configureWorkflow(
+			workflowDefinition = "Single Approver",
+			workflowResourceValue = "Blogs Entry");
+
+		ProductMenu.gotoPortlet(
+			category = "Workflow",
+			panel = "Control Panel",
+			portlet = "Metrics");
+
+		WorkflowMetrics.create6UsersAndAssign();
+
+		WorkflowMetrics.goToWorkflowProcessMetrics(workflowProcessName = "Single Approver");
+
+		Click(
+			key_assigneesNumber = "6",
+			locator1 = "WorkflowMetrics#METRICS_PERFORMANCE_BY_ASSIGNEE_CARD_VIEW_ALL_ASSIGNEES_LINK");
+
+		AssertElementPresent(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_CARD_FILTER");
+
+		Click(
+			key_assigneeName = "1user user1",
+			locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_NAME_TABLE");
+
+		AssertElementPresent(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_ALL_ITEMS");
+
+		WorkflowMetrics.verifyFiltersFromDashboard(isFilterOptionPresent = "Pending,1user user1");
+
+		Click(locator1 = "WorkflowMetrics#METRICS_BACK_ARROW");
+
+		WorkflowMetrics.applyRoleFilterToAssignee();
+
+		Click(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_SEARCH_ASSIGNEE_NAME");
+
+		AnnouncementsPortlet.configurePaginationCP(itemsPerPage = "5");
+
+		Click(locator1 = "Pagination#NEXT_LINK");
+
+		WorkflowMetrics.viewWorkloadByAssigneeSingleApprover(
+			assigneeName = "6user user6",
+			isNotPresent = "1user user1,2user user2,3user user3,4user user4,5user user5",
+			isPresent = "6user user6");
+
+		Click(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_SEARCH_ASSIGNEE_NAME");
+
+		WorkflowMetrics.clearAllFilter();
+
 }
