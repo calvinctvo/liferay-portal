@@ -321,7 +321,7 @@ definition {
 
 	macro selectWorkloadByAssigneeCardFilterValue {
 		var key_workflowStep = "${workflowStep}";
-
+		
 		Click(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_CARD_FILTER");
 
 		Click(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_CARD_FILTER_OPTION");
