@@ -134,6 +134,12 @@ definition {
 
 		WorkflowMetrics.verifyFiltersFromDashboard(isFilterOptionPresent = "Pending,1user user1");
 
+		WorkflowMetrics.assertAllItemsValues(
+			assigneeName = "1user user1",
+			isNotPresent = "2user user2,3user user3,4user user4,5user user5,6user user6",
+			isPresent = "Blogs Entry Title 1",
+			taskName = "Review");
+
 		Navigator.gotoBack();
 
 		Click(
@@ -141,6 +147,10 @@ definition {
 			locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_TASKCOUNT_OVERDUE");
 
 		WorkflowMetrics.verifyFiltersFromDashboard(isFilterOptionPresent = "Pending,1user user1,Overdue");
+
+		AssertTextEquals.assertPartialText(
+			locator1 = "Message#EMPTY_INFO",
+			value1 = "Once there are active processes, metrics will appear here.");
 
 		Navigator.gotoBack();
 
@@ -150,6 +160,10 @@ definition {
 
 		WorkflowMetrics.verifyFiltersFromDashboard(isFilterOptionPresent = "Pending,1user user1,On Time");
 
+		AssertTextEquals.assertPartialText(
+			locator1 = "Message#EMPTY_INFO",
+			value1 = "Once there are active processes, metrics will appear here.");
+
 		Navigator.gotoBack();
 
 		Click(
@@ -157,6 +171,12 @@ definition {
 			locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_TASKCOUNT_TOTAL_PENDING");
 
 		WorkflowMetrics.verifyFiltersFromDashboard(isFilterOptionPresent = "Pending,1user user1");
+
+		WorkflowMetrics.assertAllItemsValues(
+			assigneeName = "1user user1",
+			isNotPresent = "2user user2,3user user3,4user user4,5user user5,6user user6",
+			isPresent = "Blogs Entry Title 1",
+			taskName = "Review");
 
 		Navigator.gotoBack();
 
@@ -178,8 +198,6 @@ definition {
 			onTimeTaskCount = "0",
 			overdueTaskCount = "0",
 			totalPendingTaskCount = "1");
-
-		WorkflowMetrics.clearAllFilter();
 	}
 
 	@description = "LRQA-53633 Automate LPS-103368: [Dashboard] Apply searches in the workload distribution for all assignees"
