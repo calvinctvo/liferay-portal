@@ -107,6 +107,10 @@ definition {
 			value1 = "${emptyMessage}");
 	}
 
+	macro clearAllFilter {
+		Click(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_FILTER_CLEAR_ALL");
+	}
+
 	macro createUsersAndAssignInstances {
 		var iterator = "1";
 		var numberOfBlogInstances = MathUtil.sum("${numberOfBlogInstances}", "1");
@@ -249,6 +253,22 @@ definition {
 		Click(locator1 = "WorkflowMetricsSLA#METRICS_MENU_SLA");
 
 		Click(locator1 = "WorkflowMetricsSLA#METRICS_SLA_SETTINGS");
+	}
+
+	macro searchForAssigneeName {
+		var key_assigneeName = "${assigneeName}";
+
+		Click(
+			locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_SEARCH_ASSIGNEE_NAME",
+			value1 = "${assigneeName}");
+
+		Type(
+			locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_SEARCH_ASSIGNEE_NAME",
+			value1 = "${assigneeName}");
+
+		KeyPress(
+			locator1 = "TextInput#SEARCH",
+			value1 = "\RETURN");
 	}
 
 	macro selectDateRange {
@@ -528,7 +548,7 @@ definition {
 		}
 	}
 
-	macro viewPerformanceByAssignee {
+	macro viewPerformanceByAllAssignee {
 		var key_assignee = "${assignee}";
 		var key_avgCompletionTime = "${avgCompletionTime}";
 		var key_taskCount = "${taskCount}";
@@ -543,10 +563,16 @@ definition {
 
 		AssertTextNotEquals(
 			locator1 = "WorkflowMetrics#METRICS_PERFORMANCE_BY_ASSIGNEE_AVG_COMPLETION_TIME",
-			value1 = "0min");
+			value1 = "${avgCompletionTime}");
+
+		for (var isAssigneeNotPresent : list "${isNotPresent}") {
+			var key_assignee = "${isAssigneeNotPresent}";
+
+			AssertElementNotPresent(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_NAME_TABLE");
+		}
 	}
 
-	macro viewPerformanceByAllAssignee {
+	macro viewPerformanceByAssignee {
 		var key_assignee = "${assignee}";
 		var key_avgCompletionTime = "${avgCompletionTime}";
 		var key_taskCount = "${taskCount}";
@@ -562,32 +588,6 @@ definition {
 		AssertTextEquals(
 			locator1 = "WorkflowMetrics#METRICS_PERFORMANCE_BY_ASSIGNEE_AVG_COMPLETION_TIME",
 			value1 = "${avgCompletionTime}");
-
-		for (var isAssigneeNotPresent : list "${isNotPresent}") {
-			var key_assignee = "${isAssigneeNotPresent}";
-
-			AssertElementNotPresent(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_NAME_TABLE");
-		}
-	}
-
-	macro clearAllFilter {
-		Click(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_FILTER_CLEAR_ALL");
-	}
-
-	macro searchForAssigneeName {
-		var key_assigneeName = "${assigneeName}";
-
-		Click(
-			locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_SEARCH_ASSIGNEE_NAME",
-			value1 = "${assigneeName}");
-
-		Type(
-			locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_SEARCH_ASSIGNEE_NAME",
-			value1 = "${assigneeName}");
-
-		KeyPress(
-			locator1 = "TextInput#SEARCH",
-			value1 = "\RETURN");
 	}
 
 	macro viewUserWorkloadByStepOnAllItems {
