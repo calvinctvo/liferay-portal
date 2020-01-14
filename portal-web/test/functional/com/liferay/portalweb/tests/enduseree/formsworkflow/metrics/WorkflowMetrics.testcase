@@ -118,7 +118,9 @@ definition {
 			panel = "Control Panel",
 			portlet = "Metrics");
 
-		WorkflowMetrics.create6UsersAndAssign();
+		WorkflowMetrics.createUsersAndAssignInstances(
+			numberOfUsers = "6",
+			numberOfBlogInstances = "6");
 
 		WorkflowMetrics.goToWorkflowProcessMetrics(workflowProcessName = "Single Approver");
 
