@@ -686,29 +686,6 @@ definition {
 		AssertElementPresent(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_PAGE_TASKCOUNT");
 	}
 
-	macro viewWorkloadByAssigneeSingleApprover {
-		var key_assigneeName = "${assigneeName}";
-
-		for (var isInstancePresent : list "${isPresent}") {
-			var key_assigneeName = "${isInstancePresent}";
-
-			AssertElementPresent(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_NAME_TABLE");
-
-			AssertElementPresent(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_TASKCOUNT_OVERDUE");
-
-			AssertElementPresent(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_TASKCOUNT_ON_TIME");
-
-			AssertElementPresent(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_TASKCOUNT_ON_TIME");
-
-		}
-
-		for (var isAssigneeNotPresent : list "${isNotPresent}") {
-			var key_assigneeName = "${isAssigneeNotPresent}";
-
-			AssertElementNotPresent(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_NAME_TABLE");
-		}
-	}
-
 	macro waitForCompletedSLAtoBecomeOverdue {
 		var count = "0";
 
