@@ -118,15 +118,9 @@ definition {
 			panel = "Site Administration",
 			portlet = "Blogs");
 
-		for (var count : list "1,2,3") {
-			JSONBlog.addEntry(
-				entryContent = "Blogs Entry ${count} Content",
-				entryTitle = "Blogs Entry Title ${count}");
-		}
-
-		WorkflowMetrics.executeWorkflowScript(scriptName = "addUsersWithRoles.groovy");
-
-		WorkflowMetrics.executeWorkflowScript(scriptName = "assignOpenTasksToUsers.groovy");
+		WorkflowMetrics.createUsersAndAssignInstances(
+			numberOfBlogInstances = "3",
+			numberOfUsers = "3");
 
 		WorkflowMetrics.executeWorkflowScript(scriptName = "CompleteTasksAssignedToUsers.groovy");
 
@@ -145,11 +139,9 @@ definition {
 
 		WorkflowMetrics.selectWorkloadByAssigneeCardFilterValue(workflowStep = "1Role");
 
-		Click(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_SEARCH_ASSIGNEE_NAME");
-
 		WorkflowMetrics.viewPerformanceByAllAssignee(
 			assignee = "1user user1",
-			avgCompletionTime = "1min",
+			avgCompletionTime = "0min",
 			isNotPresent = "2user user2,3user user3",
 			taskCount = "1");
 
@@ -157,11 +149,8 @@ definition {
 
 		WorkflowMetrics.selectWorkloadByAssigneeCardFilterValue(workflowStep = "2Role");
 
-		Click(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_SEARCH_ASSIGNEE_NAME");
-
 		WorkflowMetrics.viewPerformanceByAllAssignee(
 			assignee = "2user user2",
-			avgCompletionTime = "1min",
 			isNotPresent = "1user user1,3user user3",
 			taskCount = "1");
 
@@ -169,11 +158,8 @@ definition {
 
 		WorkflowMetrics.selectWorkloadByAssigneeCardFilterValue(workflowStep = "3Role");
 
-		Click(locator1 = "WorkflowMetrics#METRICS_WORKLOAD_BY_ASSIGNEE_SEARCH_ASSIGNEE_NAME");
-
 		WorkflowMetrics.viewPerformanceByAllAssignee(
 			assignee = "3user user3",
-			avgCompletionTime = "1min",
 			isNotPresent = "1user user1,2user user2",
 			taskCount = "1");
 
@@ -187,13 +173,11 @@ definition {
 
 		WorkflowMetrics.viewPerformanceByAllAssignee(
 			assignee = "1user user1",
-			avgCompletionTime = "1min",
 			isNotPresent = "3user user3",
 			taskCount = "1");
 
 		WorkflowMetrics.viewPerformanceByAllAssignee(
 			assignee = "2user user2",
-			avgCompletionTime = "1min",
 			isNotPresent = "3user user3",
 			taskCount = "1");
 
