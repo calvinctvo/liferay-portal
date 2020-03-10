@@ -11,6 +11,48 @@ definition {
 		User.firstLoginPG();
 	}
 
+	@description = "This test checks 7.3.x Theme Layout can be applied to home page."
+	@priority = "5"
+	test ApplyThemeToSinglePage {
+		property portal.acceptance = "false";
+		property test.name.skip.portal.instance = "UIInfrastructureUsecase#ApplyThemeToSinglePage";
+
+		ProductMenu.gotoPortlet(
+			category = "Apps",
+			panel = "Control Panel",
+			portlet = "App Manager");
+
+		AppManager.uploadAppCP(
+			appName = "test3-theme",
+			warFileName = "test3-theme.war");
+
+		ProductMenu.gotoPortlet(
+			category = "Site Builder",
+			panel = "Site Administration",
+			portlet = "Pages");
+
+		Page.changeCurrentTheme(
+			pageName = "Home",
+			themeName = "test3");
+
+		Navigator.openSpecificURL(url = "http://localhost:8080/web/guest");
+
+		ProductMenuHelper.closeProductMenu();
+
+		SikuliAssertElementPresent(locator1 = "Test3Theme#SCREENSHOTS_THEME_LAYOUT_PNG");
+
+		takeScreenshot();
+
+		ProductMenu.gotoPortlet(
+			category = "Site Builder",
+			panel = "Site Administration",
+			portlet = "Pages");
+
+		Page.changeCurrentTheme(
+			pageName = "Home",
+			themeName = "Classic");
+	}
+
 	tearDown {
 		var testPortalInstance = PropsUtil.get("test.portal.instance");
 
