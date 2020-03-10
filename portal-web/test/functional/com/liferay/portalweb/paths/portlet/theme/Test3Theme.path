@@ -1,0 +1,19 @@
+<html>
+<head>
+<title>Test3Theme</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">Test3Theme</td></tr>
+</thead>
+<tbody>
+<tr>
+    <td>SCREENSHOTS_THEME_LAYOUT_PNG</td>
+    <td>portal/screenshots/theme/test3_theme_layout.png</td>
+    <td></td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>
