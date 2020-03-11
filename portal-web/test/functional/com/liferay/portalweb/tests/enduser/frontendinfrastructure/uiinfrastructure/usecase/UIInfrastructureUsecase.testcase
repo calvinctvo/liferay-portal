@@ -14,7 +14,7 @@ definition {
 	@description = "This test checks 7.3.x Theme Layout can be applied to home page."
 	@priority = "5"
 	test ApplyThemeToSinglePage {
-		property portal.acceptance = "false";
+		property portal.acceptance = "calvinctvo";
 		property test.name.skip.portal.instance = "UIInfrastructureUsecase#ApplyThemeToSinglePage";
 
 		ProductMenu.gotoPortlet(
