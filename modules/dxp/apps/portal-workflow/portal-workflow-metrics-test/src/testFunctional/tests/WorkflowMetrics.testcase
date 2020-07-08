@@ -15,27 +15,27 @@ definition {
 
 		Navigator.openURL();
 
-		if ("${testPortalInstance}" != "true") {
+		// if ("${testPortalInstance}" != "true") {
 
-			GlobalMenu.gotoPortlet(
-				category = "Configuration",
-				panel = "Control Panel",
-				portlet = "Search");
+		// 	GlobalMenu.gotoPortlet(
+		// 		category = "Configuration",
+		// 		panel = "Control Panel",
+		// 		portlet = "Search");
 
-			SearchAdministration.executeSearchActions(actionsDescription = "Reindex all search indexes.");
-		}
+		// 	SearchAdministration.executeSearchActions(actionsDescription = "Reindex all search indexes.");
+		// }
 
-		GlobalMenu.gotoPortlet(
-			category = "Workflow",
-			panel = "Applications",
-			portlet = "Metrics");
+		// GlobalMenu.gotoPortlet(
+		// 	category = "Workflow",
+		// 	panel = "Applications",
+		// 	portlet = "Metrics");
 
-		WorkflowMetrics.executeIndexActions(actionDescription = "Workflow Indexes");
+		// WorkflowMetrics.executeIndexActions(actionDescription = "Workflow Indexes");
 
-		GlobalMenu.gotoPortlet(
-			category = "Workflow",
-			panel = "Applications",
-			portlet = "Metrics");
+		// GlobalMenu.gotoPortlet(
+		// 	category = "Workflow",
+		// 	panel = "Applications",
+		// 	portlet = "Metrics");
 	}
 
 	tearDown {
@@ -2165,6 +2165,30 @@ definition {
 			isNotPresent = "1user user1,2user user2",
 			isPresent = "Blogs Entry Title 3",
 			taskName = "Review");
+	}
+	@description = "LRQA-53630 Automate LPS-98518: [Dashboard] View workload distribution for all assignees"
+	@priority = "5"
+	test WorkflowMetricsReindex {
+		property portal.acceptance = "true";
+		property test.name.skip.portal.instance = "WorkflowMetrics#ViewWorkloadByAssigneePage";
+
+		GlobalMenu.gotoPortlet(
+			category = "Workflow",
+			panel = "Applications",
+			portlet = "Metrics");
+
+		WorkflowMetrics.executeIndexActions(actionDescription = "Workflow Indexes");
+
+		WorkflowMetrics.reindexSpecific(actionDescription = "Workflow Metrics Processes");
+
+		WorkflowMetrics.reindexSpecific(actionDescription = "Workflow Metrics Instances");
+
+		WorkflowMetrics.reindexSpecific(actionDescription = "Workflow Metrics Tasks");
+
+		WorkflowMetrics.reindexSpecific(actionDescription = "Workflow SLA Instance Results");
+
+		WorkflowMetrics.reindexSpecific(actionDescription = "Workflow SLA Task Results");
+
 	}
 
 }
