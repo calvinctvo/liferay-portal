@@ -187,7 +187,7 @@ definition {
 
 	@priority = "5"
 	test EditSite {
-		property portal.acceptance = "true";
+		property portal.acceptance = "testchanges";
 
 		JSONGroup.addGroup(groupName = "Site Name");
 
@@ -268,7 +268,7 @@ definition {
 
 	@priority = "5"
 	test SearchSite {
-		property portal.acceptance = "true";
+		property portal.acceptance = "testchanges";
 
 		JSONGroup.addGroup(groupName = "Site Name");
 

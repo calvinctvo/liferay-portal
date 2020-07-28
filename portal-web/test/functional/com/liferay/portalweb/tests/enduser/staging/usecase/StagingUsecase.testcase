@@ -425,7 +425,7 @@ definition {
 
 	@priority = "5"
 	test DeleteLivePage {
-		property portal.acceptance = "true";
+		property portal.acceptance = "testchanges";
 
 		SitePages.openPagesAdmin(siteURLKey = "site-name-staging");
 

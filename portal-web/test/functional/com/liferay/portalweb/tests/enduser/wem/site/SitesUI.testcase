@@ -25,7 +25,7 @@ definition {
 
 	@priority = "5"
 	test AddChildSite {
-		property portal.acceptance = "true";
+		property portal.acceptance = "testchanges";
 		property testray.component.names = "Training";
 
 		JSONGroup.addGroup(groupName = "Site Name");
@@ -96,7 +96,7 @@ definition {
 
 	@priority = "5"
 	test DeleteSite {
-		property portal.acceptance = "true";
+		property portal.acceptance = "testchanges";
 
 		ApplicationsMenu.gotoPortlet(
 			category = "Sites",
