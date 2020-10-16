@@ -3045,12 +3045,11 @@ definition {
 
 		FormViewBuilder.validateFieldLabel(fieldLabel = "Text");
 
-		Click(
-			locator1 = "FormViewBuilder#RULE_BUILDER_GO_BACK");
+		Click(locator1 = "FormViewBuilder#RULE_BUILDER_GO_BACK");
 
 		FormViewBuilder.setUpTwoFieldSets(
-			fieldType = "Text",
 			fieldSetName = "Field Sets",
+			fieldType = "Text",
 			fieldType2 = "Numeric");
 
 		FormViewBuilder.goToFieldsetsTab();
@@ -3068,8 +3067,6 @@ definition {
 		FormViewBuilder.goToFieldsetsTab();
 
 		TableViewBuilder.validateDisabledField(fieldType = "Field Sets");
-
 	}
-
 
 }
