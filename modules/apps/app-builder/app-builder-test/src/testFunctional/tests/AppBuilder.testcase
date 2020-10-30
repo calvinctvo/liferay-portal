@@ -3029,7 +3029,6 @@ definition {
 	@description = "This is a use case for LPS-95964"
 	@priority = "5"
 	test ViewFieldSetsInTableView {
-		property test.name.skip.portal.instance = "AppBuilder#ViewFieldSetsInTableView";
 		property portal.acceptance = "true";
 
 		var myFormViewName = "My Registration form";
@@ -3040,12 +3039,6 @@ definition {
 			customObjectName = "my custom object",
 			isCreatingFormView = "true",
 			isCreatingViaPlusIcon = "true");
-
-		FormViewBuilder.addFieldByDoubleClick(fieldType = "Text");
-
-		FormViewBuilder.validateFieldLabel(fieldLabel = "Text");
-
-		Click(locator1 = "FormViewBuilder#RULE_BUILDER_GO_BACK");
 
 		FormViewBuilder.setUpTwoFieldSets(
 			fieldSetName = "Field Sets",
@@ -3058,9 +3051,31 @@ definition {
 
 		FormViewBuilder.setName(formViewName = "Fields from Fieldsets");
 
-		FormViewBuilder.validateFieldLabel(fieldLabel = "Field Sets");
-
 		FormViewBuilder.save();
+
+		AppBuilderAdmin.switchTab(tabName = "Table Views");
+
+		AppBuilderAdmin.add();
+
+		TableViewBuilder.addColumnByDragAndDrop(fieldType = "Text");
+
+		TableViewBuilder.addColumnByDoubleClick(fieldType = "Numeric");
+
+		TableViewBuilder.validateDisabledField(fieldType = "Text");
+
+		TableViewBuilder.validateDisabledField(fieldType = "Numeric");
+
+		TableViewBuilder.setName(tableViewName = "Table View");
+
+		TableViewBuilder.save();
+
+		AppBuilderAdmin.openItem(itemName = "Table View");
+
+		TableViewBuilder.deleteSelectedColumnByName(columnLabel = "Text");
+
+		TableViewBuilder.save();
+
+		AppBuilderAdmin.switchTab(tabName = "Form Views");
 
 		AppBuilderAdmin.openItem(itemName = "Fields from Fieldsets");
 
