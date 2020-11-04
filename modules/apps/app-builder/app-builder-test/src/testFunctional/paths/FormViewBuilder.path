@@ -487,10 +487,9 @@
 	<td>//td[contains(@class,'table-cell-expand') and contains(.,'${key_formViewName}')]</td>
 	<td></td>
 </tr>
-
 <tr>
 	<td>RULE_BUILDER_GO_BACK</td>
-	<td>//div[contains(@class, 'sidebar-header')]//button[contains(@class,'btn btn-secondary')]</td>
+	<td>//button[contains(@class,'btn btn-secondary')]</td>
 	<td></td>
 </tr>
 
@@ -513,12 +512,6 @@
 </tr>
 
 <tr>
-	<td>FIELD_SET_SAVE_BUTTON</td>
-	<td>//div[contains(@class, 'modal-footer')]//button[contains(@class,'btn-primary')][contains(text(),'Save')]</td>
-	<td></td>
-</tr>
-
-<tr>
 	<td>FIELD_SET_ELLIPSIS_ACTION</td>
 	<td>//div[contains(@class, 'field-type autofit-row autofit-row-center')]['${key_rowNumber}']//div[contains(@class, 'autofit-col pr-2')]//div[contains(@class, 'dropdown')]//button[contains(@class, 'btn btn-monospaced btn-unstyled')]</td>
 	<td></td>
@@ -528,6 +521,10 @@
 <tr>
 	<td>FIELD_SET_DISABLED_ELLIPSIS_ACTION</td>
 	<td>//div[contains(@class, 'field-type disabled autofit-row autofit-row-center')]['${key_rowNumber}']//div[contains(@class, 'autofit-col pr-2')]//div[contains(@class, 'dropdown')]//button[contains(@class, 'btn btn-monospaced btn-unstyled')]</td>
+
+<tr>
+	<td>FIELD_SET_SAVE_BUTTON</td>
+	<td>//div[contains(@class, 'btn-group-item')]//button[contains(@class,'btn-primary')][contains(text(),'Save')]</td>
 	<td></td>
 </tr>
 
