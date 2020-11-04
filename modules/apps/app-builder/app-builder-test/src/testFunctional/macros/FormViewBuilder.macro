@@ -323,6 +323,7 @@ definition {
 	}
 
 	macro goToFieldsetsTab {
+
 		Click(locator1 = "FormViewBuilder#FIELD_SETS_TAB");
 	}
 
@@ -455,13 +456,14 @@ definition {
 	}
 
 	macro setUpTwoFieldSets {
+		var key_fieldType = "${fieldType}";
 		var key_fieldSetName = "${fieldSetName}";
 
 		Click(locator1 = "FormViewBuilder#FIELD_SETS_TAB");
 
 		Click(locator1 = "FormViewBuilder#CREATE_NEW_FIELD_SETS");
 
-		FormViewBuilder.addFieldByDoubleClick(fieldType = "${fieldType1}");
+		FormViewBuilder.addFieldByDoubleClick(fieldType = "${fieldType}");
 
 		Type(
 			locator1 = "FormViewBuilder#FIELD_SET_NAME",
