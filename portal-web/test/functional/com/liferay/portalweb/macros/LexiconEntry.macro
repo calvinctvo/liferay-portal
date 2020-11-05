@@ -148,7 +148,6 @@ definition {
 	}
 
 	macro gotoHeaderMenuItem {
-
 		Click(locator1 = "Icon#HEADER_VERTICAL_ELLIPSIS");
 
 		MenuItem.click(menuItem = "${menuItem}");

@@ -166,7 +166,6 @@ definition {
 	}
 
 	macro gotoViewEntries {
-
 		AssertElementPresent(locator1 = "Icon#BODY_VERTICAL_ELLIPSIS");
 
 		LexiconEntry.gotoEllipsisMenuItem(menuItem = "View Entries");

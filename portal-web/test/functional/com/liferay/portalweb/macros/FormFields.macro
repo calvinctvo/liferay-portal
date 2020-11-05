@@ -183,7 +183,6 @@ definition {
 	}
 
 	macro editText {
-
 		Pause(locator1 = "1000");
 
 		Type(

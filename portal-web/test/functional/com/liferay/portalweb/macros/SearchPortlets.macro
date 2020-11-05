@@ -5,7 +5,6 @@ definition {
 	 */
 
 	macro _clickAddPortlet {
-
 		Click.clickNoWaitForVisible(
 			key_portletName = "${portletName}",
 			locator1 = "Search#ADD_PORTLET_LINK");

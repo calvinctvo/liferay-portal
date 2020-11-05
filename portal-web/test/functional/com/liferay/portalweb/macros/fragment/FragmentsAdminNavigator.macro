@@ -1,7 +1,6 @@
 definition {
 
 	macro gotoAddCollection {
-
 		if (IsElementPresent(locator1 = "NavNested#NAV_NESTED_PLUS")) {
 			Click(locator1 = "NavNested#NAV_NESTED_PLUS");
 		}
@@ -29,7 +28,6 @@ definition {
 	}
 
 	macro gotoExportCollection {
-
 		Click.waitForMenuToggleJSClick(locator1 = "NavNested#NAV_NESTED_ELLIPSIS");
 
 		DropdownMenuItem.click(menuItem = "Export");
@@ -40,7 +38,6 @@ definition {
 	}
 
 	macro gotoImportCollection {
-
 		if (IsElementPresent(locator1 = "NavNested#NAV_NESTED_ELLIPSIS")) {
 			Click.waitForMenuToggleJSClick(locator1 = "NavNested#NAV_NESTED_ELLIPSIS");
 		}

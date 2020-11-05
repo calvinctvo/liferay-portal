@@ -9,9 +9,7 @@ definition {
 		}
 		else {
 			var browserType = PropsUtil.get("browser.type");
-
 			Click.waitForPersonalMenuJSClick(locator1 = "UserBar#USER_AVATAR_ICON");
-
 		}
 
 		AssertVisible(locator1 = "UserBar#USER_AVATAR_DROPDOWN_PORTAL_OPEN");

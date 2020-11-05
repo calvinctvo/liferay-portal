@@ -1,9 +1,6 @@
 definition {
 
 	macro _clickAddPortlet {
-
-		locator1 = "ControlMenuAddPanel#ADD_PORTLET_LINK");
-
 	Click.clickNoWaitForVisible(
 		key_portletName = "${portletName}",
 		locator1 = "ControlMenuAddPanel#ADD_PORTLET_LINK");

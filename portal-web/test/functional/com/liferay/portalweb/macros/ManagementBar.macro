@@ -31,7 +31,6 @@ definition {
 	}
 
 	macro clickInfo {
-
 		Click.clickNoMouseOver(locator1 = "Icon#INFO");
 	}
 
