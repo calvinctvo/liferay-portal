@@ -1074,4 +1074,31 @@ definition {
 		}
 	}
 
+	@description = "This test validates sign in and sign out UI"
+	@ignore = "true"
+	@priority = "5"
+	test CheckIE11DisableSPA {
+		property portal.acceptance = "false";
+		ApplicationsMenu.gotoPortlet(
+			category = "Configuration",
+			panel = "Control Panel",
+			portlet = "System Settings");
+
+		SystemSettings.gotoConfiguration(
+			configurationCategory = "Infrastructure",
+			configurationName = "Frontend SPA Infrastructure",
+			configurationScope = "System Scope");
+
+		Click(locator1 = "FormFields#DISABLED_SPA_IE");
+
+		Click(locator1 = "FormFields#DISABLED_SPA_IE11");
+
+		Click(locator1 = "FormFields#UPDATE_BUTTON");
+
+		AssertNotChecked(locator1="FormFields#DISABLED_SPA_IE");
+
+		AssertNotChecked(locator1="FormFields#DISABLED_SPA_IE11");
+
+	}
+
 }
