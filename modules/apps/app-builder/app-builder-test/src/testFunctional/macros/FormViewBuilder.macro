@@ -129,6 +129,10 @@ definition {
 		Click(locator1 = "FormViewBuilder#CREATE_NEW_RULE_BUTTON");
 	}
 
+	macro createNewRule {
+		Click(locator1 = "FormViewBuilder#CREATE_NEW_RULE_BUTTON");
+	}
+
 	macro deleteButtonInDeleteFromObject {
 		Click(locator1 = "FormViewBuilder#DELETE_OBJECT_LABEL_DELETE_BUTTON");
 	}
@@ -323,7 +327,6 @@ definition {
 	}
 
 	macro goToFieldsetsTab {
-
 		Click(locator1 = "FormViewBuilder#FIELD_SETS_TAB");
 	}
 
