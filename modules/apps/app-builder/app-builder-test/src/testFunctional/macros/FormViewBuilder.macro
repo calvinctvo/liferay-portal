@@ -635,6 +635,10 @@ definition {
 		AssertElementPresent(locator1 = "FormViewBuilder#VALIDATE_DELETE_USED_OBJECT_MESSAGE");
 	}
 
+	macro validateDisabledRequiredField {
+		AssertElementPresent(locator1 = "FormViewBuilder#FIELD_SET_DISABLED_REQUIRED_FIELD");
+	}
+
 	macro validateFieldInObject {
 		var key_fieldLabel = "${fieldLabel}";
 
@@ -736,6 +740,18 @@ definition {
 		AssertTextEquals(
 			locator1 = "FormViewBuilder#PREDEFINED_VALUE_AT_FORM",
 			value1 = "${fieldValue}");
+	}
+
+	macro validateRequiredField {
+		AssertElementPresent(locator1 = "FormViewBuilder#FIELD_SET_REQUIRED_FIELD");
+	}
+
+	macro validateRequiredIcon {
+		AssertElementPresent(locator1 = "FormViewBuilder#FIELD_SET_REQUIRED_ICON");
+	}
+
+	macro validateRequiredIconNotPresent {
+		AssertElementNotPresent(locator1 = "FormViewBuilder#FIELD_SET_SIDE_OBJECT");
 	}
 
 	macro validateRuleName {
