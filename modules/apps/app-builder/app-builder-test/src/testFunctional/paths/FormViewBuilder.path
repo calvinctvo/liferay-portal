@@ -561,6 +561,30 @@
 </tr>
 
 <tr>
+	<td>FIELD_SET_DISABLED_REQUIRED_FIELD</td>
+	<td>//button[@disabled='' and contains(@class, 'btn-outline-borderless')]</td>
+	<td></td>
+</tr>
+
+<tr>
+	<td>FIELD_SET_REQUIRED_FIELD</td>
+	<td>//button[contains(@class, 'btn-outline-borderless') and contains(@title,'Required options')]</td>
+	<td></td>
+</tr>
+
+<tr>
+	<td>FIELD_SET_REQUIRED_ICON</td>
+	<td>//span[contains(@class,'ddm-label-required')]</td>
+	<td></td>
+</tr>
+
+<tr>
+	<td>FIELD_SET_SIDE_OBJECT</td>
+	<td>//div[contains(@class,'list-group-title ddm-label-required')]</td>
+	<td></td>
+</tr>
+
+<tr>
 	<td>EMPTY_FORM_FIELD</td>
 	<td>//p[contains(text(),'Drag fields from the sidebar to compose your form.')]</td>
 	<td></td>
