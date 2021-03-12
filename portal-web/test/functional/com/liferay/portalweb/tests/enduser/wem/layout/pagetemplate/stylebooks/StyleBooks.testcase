@@ -241,6 +241,8 @@ definition {
 	@description = "This is for LPS-116106. Page Creator can change style book of content page via Look and Feel settings."
 	@priority = "4"
 	test ChangeStyleBookOfContentPageViaLookAndFeel {
+		property testray.component.names = "Frontend Token";
+
 		task ("Add a style book") {
 			StyleBooksAdmin.openStyleBooksAdmin(siteURLKey = "test-site-name");
 
