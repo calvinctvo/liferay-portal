@@ -154,7 +154,7 @@ definition {
 
 		AssertHTMLSourceTextNotPresent(value1 = "classic-theme/images/favicon.ico");
 
-		Portlet.viewTitle(portletName = "Hello World");
+		Portlet.viewTitle(portletName = "Welcome to Liferay Portal");
 
 		takeScreenshot();
 	}
