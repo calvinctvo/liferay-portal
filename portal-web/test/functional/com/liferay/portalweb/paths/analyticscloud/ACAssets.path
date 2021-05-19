@@ -1,0 +1,35 @@
+<html>
+<head>
+<title>ACLogin</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">ACLogin</td></tr>
+</thead>
+<tbody>
+<!-- ASSETS  -->
+<tr>
+	<td>ASSETS_PAGINATION</td>
+	<td>//*[contains(@class,'pagination-root')]//*[contains(@class,'page-item')]//*[contains(text(),'${key_page}')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ASSETS_TABLE_ROW</td>
+	<td>//table//tbody//div[@class='content-container']//a[text()='${key_itemName}']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>GENERIC_ASSETS_TAB</td>
+	<td>//ul//li[contains(@class,'nav-item') and contains(.,'${key_tabName}')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>TIME_FILTER</td>
+	<td>//div[contains(@class,'dropdown')]/button[contains(text(),'Last 30 days')]</td>
+	<td></td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>
