@@ -1,0 +1,13 @@
+definition {
+
+	macro goToAssetsPage {
+		ACNavigation.goToSidebarOption(SidebarOption = "Assets");
+	}
+
+	macro goToAssetsTab {
+		var key_tabName = "${tabName}";
+
+		Click(locator1 = "ACAssets#GENERIC_ASSETS_TAB");
+	}
+
+}
