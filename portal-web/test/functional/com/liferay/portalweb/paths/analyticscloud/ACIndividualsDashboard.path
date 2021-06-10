@@ -64,6 +64,10 @@
     <td>//h5[text()='Total Individuals']/parent::div/following-sibling::div/div[@class='total']</td>
     <td></td>
 </tr>
+<tr>
+    <td>KNOWN_INDIVIDUAL_ATTRIBUTE</td>
+    <td>//div[contains(@class,'table-responsive')]//td[contains(@class,'table-cell-expand') and contains(.,'${key_individualAttribute}')]</td>
+    <td></td>
 </tbody>
 </table>
 </body>
