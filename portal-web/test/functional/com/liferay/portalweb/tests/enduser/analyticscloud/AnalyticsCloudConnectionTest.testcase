@@ -8,7 +8,6 @@ definition {
 	property testray.main.component.name = "Analytics Cloud";
 
 	setUp {
-
 		ACUtils.launchAC();
 
 		ACSettings.takeTokenFromAnalyticsCloud();
@@ -30,19 +29,13 @@ definition {
 		ACUtils.tearDownAC();
 	}
 
-	@description = "Validate if the user can connect AC to DXP"
-	@priority = "5"
-	test ConnectACtoDXP {
-		ACDXPSettings.connectDXPtoAnalyticsCloud();
-	}
-
 	@description = "Sync Liferay Data Source Contacts"
 	@priority = "5"
 	test CanSyncAllContactsFromDXPToAC {
 		ACUtils.createBlogsAndAddToPage(entryTitle = "Blogs Entry");
 
 		ACDXPSettings.connectDXPtoAnalyticsCloud(siteName = "Liferay DXP");
-		
+
 		ACUtils.closeAllSessions();
 
 		Pause(locator1 = "30000");
@@ -62,8 +55,14 @@ definition {
 		ACNavigation.switchTab(tabName = "Details");
 
 		ACIndividualsDashboard.assertIndividualAttribute(individualAttribute = "test@liferay.com");
-		
+
 		ACIndividualsDashboard.assertIndividualAttribute(individualAttribute = "Test");
+	}
+
+	@description = "Validate if the user can connect AC to DXP"
+	@priority = "5"
+	test ConnectACtoDXP {
+		ACDXPSettings.connectDXPtoAnalyticsCloud();
 	}
 
 }
