@@ -50,6 +50,11 @@
     <td></td>
 </tr>
 <tr>
+    <td>KNOWN_INDIVIDUAL_ATTRIBUTE</td>
+    <td>//div[contains(@class,'table-responsive')]//td[contains(@class,'table-cell-expand') and contains(.,'${key_individualAttribute}')]</td>
+    <td></td>
+</tr>
+<tr>
     <td>INDIVIDUALS_ACTIVITIES_TIME_RANGE</td>
     <td>//div[contains(@class,'activities-date') and contains(.,'${key_timeRange}')]</td>
     <td></td>
