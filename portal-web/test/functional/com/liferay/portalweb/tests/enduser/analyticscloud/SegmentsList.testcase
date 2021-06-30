@@ -83,7 +83,7 @@ definition {
 		ACSegments.deleteSegment(searchTerm = "Static Segment Test 2");
 	}
 
-	@description = "Show segment list"
+	@description = "Show segments list"
 	@priority = "5"
 	test CanShowSegmentList {
 		JSONUser.addUser(
