@@ -83,9 +83,11 @@ definition {
 		ACSegments.deleteSegment(searchTerm = "Static Segment Test 2");
 	}
 
-	@description = "Search for specific segment"
+	@description = "Show segments list"
 	@priority = "5"
 	test CanShowSegmentList {
+		property portal.acceptance = "calvinctvo";
+
 		JSONUser.addUser(
 			userEmailAddress = "userea@liferay.com",
 			userFirstName = "userfn",
