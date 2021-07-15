@@ -34,11 +34,12 @@ definition {
 		ACUtils.tearDownAC();
 	}
 
-    @description = "Automation ID: LRAC-8129 | Test Summary: Show data source lists"
+	@description = "Automation ID: LRAC-8129 | Test Summary: Show data source lists"
 	@ignore = "true"
 	@priority = "5"
-        test DataSourceListShowsAllDataSources {
-  // TODO LRAC-8129 DataSourceListShowsAllDataSources
+	test DataSourceListShowsAllDataSources {
+		// TODO LRAC-8129 DataSourceListShowsAllDataSources
+
 	}
 
 }
