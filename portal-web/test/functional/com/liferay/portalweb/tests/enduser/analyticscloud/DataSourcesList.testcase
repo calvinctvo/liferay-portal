@@ -39,7 +39,6 @@ definition {
 	@priority = "5"
 	test DataSourceListShowsAllDataSources {
 		// TODO LRAC-8129 DataSourceListShowsAllDataSources
-
 	}
 
 }
