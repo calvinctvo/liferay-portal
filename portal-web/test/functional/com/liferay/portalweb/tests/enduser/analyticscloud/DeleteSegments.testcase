@@ -269,7 +269,7 @@ definition {
 	@ignore = "true"
 	@priority = "4"
 	test DeleteCustomFieldUsedSegmentResetData {
-		property portal.upstream = "quarantine";
+		property portal.upstream = "calvin";
 
 		// AC Refactor: This testcase fails due to a bug. Known User numbers do not appear.
 		// AC Refactor ticket: LRAC-9300
