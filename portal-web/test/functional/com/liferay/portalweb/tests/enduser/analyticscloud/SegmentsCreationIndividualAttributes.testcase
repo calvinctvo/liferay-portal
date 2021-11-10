@@ -409,7 +409,7 @@ definition {
 	@ignore = "true"
 	@priority = "4"
 	test CanAddSegmentWithCustomFieldsForIndividuals {
-		property portal.upstream = "quarantine";
+		property portal.upstream = "calvin";
 
 		// AC Refactor: DXP User never appears
 		// AC Refactor ticket: LRAC-9351
