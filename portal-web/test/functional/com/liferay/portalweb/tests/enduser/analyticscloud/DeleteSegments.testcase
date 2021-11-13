@@ -333,7 +333,9 @@ definition {
 
 			ACProperties.switchProperty(propertyName = "${propertyName}");
 		}
-true
+
+		task ("Add a new dynamic segment") {
+			ACNavigation.goToSegments();
 
 			ACSegments.createDynamicSegment();
 
