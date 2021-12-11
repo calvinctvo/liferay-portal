@@ -1,0 +1,42 @@
+@component-name = "portal-analytics-cloud"
+definition {
+
+	property portal.release = "false";
+	property portal.upstream = "true";
+	property property.group = "analytics.cloud.profile";
+	property testray.main.component.name = "Analytics Cloud";
+
+	setUp {
+		TestCase.setUpPortalInstance();
+
+		User.firstLoginPG();
+	}
+
+	tearDown {
+		var testPortalInstance = PropsUtil.get("test.portal.instance");
+
+	}
+
+    @priority = "4"
+	test GenerateRandomEvents {
+		property portal.acceptance = "true";
+		property portal.upstream = "true";
+
+		Navigator.gotoPage(pageName = "Tools");
+
+		ACPersonas.addRandomEvent(randomEventName = "Cindy's Event",
+                                  attributeCount = "5");
+
+        Click(locator1 = "ACPersonas#BOOLEAN_CHECK_BOX");
+
+        Click(locator1 = "ACPersonas#DURATION_CHECK_BOX");
+
+		Click(locator1 = "ACPersonas#DATE_CHECK_BOX");
+
+        Click(locator1 = "ACPersonas#GENERATE_RANDOM_EVENT_BUTTON");
+
+        ACPersonas.addCustomEvent(placementAttributes = "height",
+                                  attributeValues = "5");
+    }
+
+}
