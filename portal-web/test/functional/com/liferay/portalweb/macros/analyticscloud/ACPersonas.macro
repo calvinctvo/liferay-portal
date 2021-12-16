@@ -1,11 +1,5 @@
 definition {
 
-	macro accessSegment {
-		var key_segmentName = "${segmentName}";
-
-		Click(locator1 = "ACSegments#SELECT_SEGMENT");
-	}
-
 	macro addRandomEvent {
 
 		Type(locator1 = "ACPersonas#RANDOM_EVENT_NAME",

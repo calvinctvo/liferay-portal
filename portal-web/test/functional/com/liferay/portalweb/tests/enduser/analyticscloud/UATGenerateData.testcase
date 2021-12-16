@@ -7,20 +7,21 @@ definition {
 	property testray.main.component.name = "Analytics Cloud";
 
 	setUp {
-		TestCase.setUpPortalInstance();
-
-		User.firstLoginPG();
+		    Navigator.openURL(baseURL = "https://osbasahdxpserver73-ac-stagingdxps.lfr.cloud/");
 	}
 
 	tearDown {
-		var testPortalInstance = PropsUtil.get("test.portal.instance");
+		ACUtils.closeAllSessionsAndWait();
 
 	}
 
+    @description = "Test Summary: Cindy wants to create a custom event"
     @priority = "4"
 	test GenerateRandomEvents {
-		property portal.acceptance = "true";
-		property portal.upstream = "true";
+        ACUtils.navigateToSitePageWithUser(
+			emailList = "benny.browser@liferay.com",
+			pageName = "Home",
+			siteName = "Brother Ocean Co.");
 
 		Navigator.gotoPage(pageName = "Tools");
 
