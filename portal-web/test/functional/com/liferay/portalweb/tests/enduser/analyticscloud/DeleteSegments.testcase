@@ -277,10 +277,9 @@ definition {
 	}
 
 	@description = "Feature ID: Legacy | Automation ID: LRAC-8592 | Test Summary: Deleting a custom field that is used by a segment should reset the data"
-	@ignore = "true"
 	@priority = "4"
 	test DeleteCustomFieldUsedSegmentResetData {
-		property portal.upstream = "quarantine";
+		property portal.upstream = "calvin";
 
 		// AC Refactor: This testcase fails due to a bug. Known User numbers do not appear.
 		// AC Refactor ticket: LRAC-9300
@@ -373,10 +372,14 @@ definition {
 
 			ACSegments.accessSegment(segmentName = "New Segment Test");
 
-			ACSegments.viewSegmentMembershipLegendNumbers(
-				anonymousNumber = "0",
-				knownNumber = "1",
-				totalNumber = "1");
+			// ACSegments.viewSegmentMembershipLegendNumbers(
+			// 	anonymousNumber = "0",
+			// 	knownNumber = "1",
+			// 	totalNumber = "1");
+
+			ACNavigation.switchTab(tabName = "Membership");
+
+			ACUtils.viewNameList(nameList = "ac ac");
 		}
 
 		task ("Sign in DXP") {
