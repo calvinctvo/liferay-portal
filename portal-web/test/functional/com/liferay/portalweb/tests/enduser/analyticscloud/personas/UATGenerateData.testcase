@@ -19,7 +19,7 @@ definition {
     @priority = "4"
 	test GenerateRandomEvents {
         ACUtils.navigateToSitePageWithUser(
-			emailList = "benny.browser@liferay.com",
+			emailList = "cindy.customevent@liferay.com",
 			pageName = "Home",
 			siteName = "Brother Ocean Co.");
 
