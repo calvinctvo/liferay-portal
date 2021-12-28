@@ -23,9 +23,12 @@ definition {
 			siteName = "Brother Ocean Co.");
 
 		Navigator.gotoSitePage(pageName = "Order");
-		ACPersonas.buyBoard();
-		ACPersonas.buySwimwear();
-		ACPersonas.buyGear();
 
+		ACPersonas.buyBoard();
+
+		ACPersonas.buySwimwear();
+
+		ACPersonas.buyGear();
 	}
-} 
+
+}
