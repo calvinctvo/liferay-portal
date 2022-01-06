@@ -23,7 +23,6 @@ definition {
 			siteName = "Brother Ocean Co.");
 
 		Navigator.gotoSitePage(pageName = "Blog");
-
 	}
 
 }
