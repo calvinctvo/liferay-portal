@@ -16,19 +16,32 @@ definition {
 
 	@description = "Test Summary: Browse portal pages as Benny Browser"
 	@priority = "5"
-	test SallyShopperTest {
+	test GenerateShopData {
 		ACUtils.navigateToSitePageWithUser(
 			emailList = "sally.shopper@liferay.com",
 			pageName = "Home",
 			siteName = "Brother Ocean Co.");
 
-		Navigator.gotoSitePage(pageName = "Order");
+		Navigator.gotoSitePage(pageName = "Shop");
 
 		ACPersonas.buyBoard();
 
 		ACPersonas.buySwimwear();
 
 		ACPersonas.buyGear();
+	}
+
+	@description = "Test Summary: Browse portal pages as Benny Browser"
+	@priority = "5"
+	test GenerateABTestData {
+		ACUtils.navigateToSitePageWithUser(
+			emailList = "abby.ab@liferay.com",
+			pageName = "Home",
+			siteName = "Brother Ocean Co.");
+
+		Navigator.gotoSitePage(pageName = "Shop");
+
+		ACPersonas.buyBoard();
 	}
 
 }
