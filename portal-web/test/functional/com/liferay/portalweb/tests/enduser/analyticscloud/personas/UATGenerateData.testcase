@@ -14,7 +14,7 @@ definition {
 		ACUtils.closeAllSessionsAndWait();
 	}
 
-	@description = "Test Summary: Browse portal pages as Benny Browser"
+	@description = "Test Summary: Shop for different items as Sally Shopper"
 	@priority = "5"
 	test GenerateShopData {
 		ACUtils.navigateToSitePageWithUser(
@@ -31,7 +31,7 @@ definition {
 		ACPersonas.buyGear();
 	}
 
-	@description = "Test Summary: Browse portal pages as Benny Browser"
+	@description = "Test Summary: Perform clicks for AB testing as Abby AB"
 	@priority = "5"
 	test GenerateABTestData {
 		ACUtils.navigateToSitePageWithUser(
@@ -42,6 +42,23 @@ definition {
 		Navigator.gotoSitePage(pageName = "Shop");
 
 		ACPersonas.buyBoard();
+	}
+
+	@description = "Test Summary: Search for key words and article as Steven Searcher"
+	@priority = "5"
+	test GenerateSearchData {
+		ACUtils.navigateToSitePageWithUser(
+			emailList = "steven.searcher@liferay.com",
+			pageName = "Home",
+			siteName = "Brother Ocean Co.");
+
+		ACUtils.searchBar(searchItem = "surf");
+
+		Click(locator1 = "ACPersonas#SEARCH_RESULT");
+
+		ACUtils.searchBar(searchItem = "beach");
+
+		Click(locator1 = "ACPersonas#SEARCH_RESULT");
 	}
 
 }

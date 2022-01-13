@@ -41,6 +41,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>SEARCH_RESULT</td>
+	<td>//div[contains(@class,'list-group-title')]['${key_article}'] </td>
+	<td></td>
+</tr>
+<tr>
 	<td>NUMBER_CHECK_BOX</td>
 	<td>//div[contains(@class,'journal-content-article')]//input[@id='number']</td>
 	<td></td>
