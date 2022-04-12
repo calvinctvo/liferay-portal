@@ -59,6 +59,22 @@ definition {
 		ACPersonas.buySwimwear();
 
 		ACPersonas.buyGear();
+
+    @description = "Test Summary: Cindy wants to create a custom event"
+    @priority = "4"
+	test GenerateRandomEvents {
+        ACUtils.navigateToSitePageWithUser(
+			emailList = "cindy.customevent@liferay.com",
+
+	@description = "Test Summary: Browse blog page as Barbara Blogger"
+	@priority = "5"
+	test BarbaraBloggerTest {
+		ACUtils.navigateToSitePageWithUser(
+			emailList = "barbara.blogger@liferay.com",
+			pageName = "Home",
+			siteName = "Brother Ocean Co.");
+
+		Navigator.gotoSitePage(pageName = "Blog");
 	}
 
 }
