@@ -73,7 +73,7 @@ definition {
 
 	}
 
-    @description = "Test Summary: Cindy wants to create a custom event"
+    @description = "Test Summary: Generate custom random events"
     @priority = "4"
 	test GenerateRandomEvents {
         ACUtils.navigateToSitePageWithUser(
