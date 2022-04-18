@@ -85,7 +85,6 @@ definition {
 
         ACPersonas.addCustomEvent(placementAttributes = "height",
                                   attributeValues = "5");
-
     }
 
 	@description = "Test Summary: Browse blog page as Barbara Blogger"
@@ -97,7 +96,6 @@ definition {
 			siteName = "Brother Ocean Co.");
 
 		Navigator.gotoSitePage(pageName = "Blog");
-
 	}
 
 }
