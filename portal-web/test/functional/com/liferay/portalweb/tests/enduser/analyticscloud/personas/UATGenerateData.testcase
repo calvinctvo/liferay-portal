@@ -70,7 +70,6 @@ definition {
 		ACPersonas.buySwimwear();
 
 		ACPersonas.buyGear();
-
 	}
 
     @description = "Test Summary: Generate custom random events"
