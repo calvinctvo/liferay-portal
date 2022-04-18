@@ -65,6 +65,25 @@ definition {
 	test GenerateRandomEvents {
         ACUtils.navigateToSitePageWithUser(
 			emailList = "cindy.customevent@liferay.com",
+			pageName = "Home",
+			siteName = "Brother Ocean Co.");
+
+		Navigator.gotoPage(pageName = "Tools");
+
+		ACPersonas.addRandomEvent(randomEventName = "Cindy's Event",
+                                  attributeCount = "5");
+
+        Click(locator1 = "ACPersonas#BOOLEAN_CHECK_BOX");
+
+        Click(locator1 = "ACPersonas#DURATION_CHECK_BOX");
+
+		Click(locator1 = "ACPersonas#DATE_CHECK_BOX");
+
+        Click(locator1 = "ACPersonas#GENERATE_RANDOM_EVENT_BUTTON");
+
+        ACPersonas.addCustomEvent(placementAttributes = "height",
+                                  attributeValues = "5");
+    }
 
 	@description = "Test Summary: Browse blog page as Barbara Blogger"
 	@priority = "5"
