@@ -27,6 +27,17 @@ definition {
 		ACPersonas.buyBoard();
 	}
 
+	@description = "Test Summary: Browse blog page as Barbara Blogger"
+	@priority = "5"
+	test GenerateBlogData {
+		ACUtils.navigateToSitePageWithUser(
+			emailList = "barbara.blogger@liferay.com",
+			pageName = "Home",
+			siteName = "Brother Ocean Co.");
+
+		Navigator.gotoSitePage(pageName = "Blog");
+	}
+
 	@description = "Test Summary: Search for key words and article as Steven Searcher"
 	@priority = "5"
 	test GenerateSearchData {
@@ -86,16 +97,5 @@ definition {
         ACPersonas.addCustomEvent(placementAttributes = "height",
                                   attributeValues = "5");
     }
-
-	@description = "Test Summary: Browse blog page as Barbara Blogger"
-	@priority = "5"
-	test GenerateBlogData {
-		ACUtils.navigateToSitePageWithUser(
-			emailList = "barbara.blogger@liferay.com",
-			pageName = "Home",
-			siteName = "Brother Ocean Co.");
-
-		Navigator.gotoSitePage(pageName = "Blog");
-	}
 
 }
