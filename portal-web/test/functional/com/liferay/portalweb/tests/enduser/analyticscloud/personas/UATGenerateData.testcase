@@ -72,8 +72,8 @@ definition {
 		ACPersonas.buyGear();
 	}
 
-    @description = "Test Summary: Generate custom random events"
-    @priority = "4"
+	@description = "Test Summary: Generate custom random events"
+	@priority = "4"
 	test GenerateRandomEvents {
         ACUtils.navigateToSitePageWithUser(
 			emailList = "cindy.customevent@liferay.com",
