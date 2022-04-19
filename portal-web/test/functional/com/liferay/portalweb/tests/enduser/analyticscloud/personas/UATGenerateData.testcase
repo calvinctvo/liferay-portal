@@ -38,6 +38,33 @@ definition {
 		Navigator.gotoSitePage(pageName = "Blog");
 	}
 
+	@description = "Test Summary: Generate custom random events"
+	@priority = "4"
+	test GenerateRandomEvents {
+		ACUtils.navigateToSitePageWithUser(
+			emailList = "cindy.customevent@liferay.com",
+			pageName = "Home",
+			siteName = "Brother Ocean Co.");
+
+		Navigator.gotoPage(pageName = "Tools");
+
+		ACPersonas.addRandomEvent(
+			attributeCount = "5",
+			randomEventName = "Cindy's Event");
+
+		Click(locator1 = "ACPersonas#BOOLEAN_CHECK_BOX");
+
+		Click(locator1 = "ACPersonas#DURATION_CHECK_BOX");
+
+		Click(locator1 = "ACPersonas#DATE_CHECK_BOX");
+
+		Click(locator1 = "ACPersonas#GENERATE_RANDOM_EVENT_BUTTON");
+
+		ACPersonas.addCustomEvent(
+			attributeValues = "5",
+			placementAttributes = "height");
+	}
+
 	@description = "Test Summary: Search for key words and article as Steven Searcher"
 	@priority = "5"
 	test GenerateSearchData {
@@ -71,30 +98,5 @@ definition {
 
 		ACPersonas.buyGear();
 	}
-
-	@description = "Test Summary: Generate custom random events"
-	@priority = "4"
-	test GenerateRandomEvents {
-        ACUtils.navigateToSitePageWithUser(
-			emailList = "cindy.customevent@liferay.com",
-			pageName = "Home",
-			siteName = "Brother Ocean Co.");
-
-		Navigator.gotoPage(pageName = "Tools");
-
-		ACPersonas.addRandomEvent(randomEventName = "Cindy's Event",
-                                  attributeCount = "5");
-
-        Click(locator1 = "ACPersonas#BOOLEAN_CHECK_BOX");
-
-        Click(locator1 = "ACPersonas#DURATION_CHECK_BOX");
-
-		Click(locator1 = "ACPersonas#DATE_CHECK_BOX");
-
-        Click(locator1 = "ACPersonas#GENERATE_RANDOM_EVENT_BUTTON");
-
-        ACPersonas.addCustomEvent(placementAttributes = "height",
-                                  attributeValues = "5");
-    }
 
 }
