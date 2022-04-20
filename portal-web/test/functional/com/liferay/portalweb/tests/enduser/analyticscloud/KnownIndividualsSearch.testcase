@@ -778,6 +778,8 @@ definition {
 	@description = "Feature ID: Legacy | Automation ID: LRAC-9029 | Test Summary: Sort Individuals List"
 	@priority = "3"
 	test SortIndividualList {
+		property portal.upstream = "calvin";
+		
 		var usernameList = "user1,user2,user3";
 		var emailList = "user1@liferay.com,user2@liferay.com,user3@liferay.com";
 
@@ -797,9 +799,13 @@ definition {
 			ACDXPSettings.syncNewContactData();
 		}
 
+		ACUtils.createBlogsAndAddToPage();
+
 		task ("Sign in with the new user to visit the site pages") {
 			ACUtils.navigateToSitePageWithUser(
 				emailList = "${emailList}",
+				actionType = "View Blog",
+				documentTitleList = "Blogs AC Title",
 				pageName = "AC Page",
 				siteName = "Site Name");
 		}
