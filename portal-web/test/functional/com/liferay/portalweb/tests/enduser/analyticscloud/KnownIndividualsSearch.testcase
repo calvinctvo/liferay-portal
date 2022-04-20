@@ -783,6 +783,8 @@ definition {
 		var usernameList = "user1,user2,user3";
 		var emailList = "user1@liferay.com,user2@liferay.com,user3@liferay.com";
 
+		ACUtils.createBlogsAndAddToPage();
+
 		task ("Get site assigned property name") {
 			var propertyName = ACDXPSettings.connectDXPtoAnalyticsCloud(siteName = "Site Name");
 		}
@@ -799,7 +801,6 @@ definition {
 			ACDXPSettings.syncNewContactData();
 		}
 
-		ACUtils.createBlogsAndAddToPage();
 
 		task ("Sign in with the new user to visit the site pages") {
 			ACUtils.navigateToSitePageWithUser(
