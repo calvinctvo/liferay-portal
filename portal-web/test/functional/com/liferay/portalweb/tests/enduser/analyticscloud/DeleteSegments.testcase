@@ -167,6 +167,9 @@ definition {
 	@priority = "4"
 	test CanDeleteSegmentViaSegmentList {
 		property test.name.skip.portal.instance = "DeleteSegments#CanDeleteSegmentViaSegmentList";
+		property portal.upstream = "calvin";
+
+		ACUtils.createBlogsAndAddToPage();
 
 		task ("Get site assigned property name") {
 			var propertyName = ACDXPSettings.connectDXPtoAnalyticsCloud(siteName = "Site Name");
@@ -190,6 +193,8 @@ definition {
 				userLoginFullName = "ac ac");
 
 			ACUtils.navigateToSitePage(
+				actionType = "View Blog",
+				documentTitleList = "Blogs AC Title",
 				pageName = "AC Page",
 				siteName = "Site Name");
 		}
@@ -228,7 +233,10 @@ definition {
 	@description = "Feature ID: Legacy | Automation ID: LRAC-8138 | Test Summary: Delete a static segment"
 	@priority = "5"
 	test CanDeleteStaticSegment {
+		property portal.upstream = "calvin";
 		property test.name.skip.portal.instance = "DeleteSegments#CanDeleteStaticSegment";
+		
+		ACUtils.createBlogsAndAddToPage();
 
 		var propertyName = ACDXPSettings.connectDXPtoAnalyticsCloud(siteName = "Site Name");
 
@@ -245,6 +253,8 @@ definition {
 			userLoginFullName = "ac ac");
 
 		ACUtils.navigateToSitePage(
+			actionType = "View Blog",
+			documentTitleList = "Blogs AC Title",
 			pageName = "AC Page",
 			siteName = "Site Name");
 
@@ -281,6 +291,9 @@ definition {
 	@priority = "5"
 	test CheckIfKnownIndividualsDontDisappearAfterDeleteStaticSegment {
 		property test.name.skip.portal.instance = "DeleteSegments#CheckIfKnownIndividualsDontDisappearAfterDeleteStaticSegment";
+		property portal.upstream = "calvin";
+
+		ACUtils.createBlogsAndAddToPage();
 
 		task ("Connect the DXP to AC") {
 			ACDXPSettings.connectDXPtoAnalyticsCloud(siteName = "Site Name");
@@ -306,6 +319,8 @@ definition {
 
 		task ("View the site page") {
 			ACUtils.navigateToSitePage(
+				actionType = "View Blog",
+				documentTitleList = "Blogs AC Title",
 				pageName = "AC Page",
 				siteName = "Site Name");
 		}
