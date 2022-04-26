@@ -386,6 +386,9 @@ definition {
 	@priority = "4"
 	test DeleteCustomFieldUsedSegmentResetData {
 		property test.name.skip.portal.instance = "DeleteSegments#DeleteCustomFieldUsedSegmentResetData";
+		property portal.upstream = "calvin";
+
+		ACUtils.createBlogsAndAddToPage();
 
 		task ("Connect DXP to AC") {
 			ACDXPSettings.connectDXPtoAnalyticsCloud(siteName = "Site Name");
@@ -450,6 +453,8 @@ definition {
 				userLoginFullName = "ac ac");
 
 			ACUtils.navigateToSitePage(
+				actionType = "View Blog",
+				documentTitleList = "Blogs AC Title",
 				pageName = "AC Page",
 				siteName = "Site Name");
 		}

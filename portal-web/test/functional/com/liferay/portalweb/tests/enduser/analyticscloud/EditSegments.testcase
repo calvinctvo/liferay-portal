@@ -402,6 +402,9 @@ definition {
 	@priority = "3"
 	test EditorShowsStaticSegmentLabel {
 		property test.name.skip.portal.instance = "EditSegments#EditorShowsStaticSegmentLabel";
+		property portal.upstream = "calvin";
+
+		ACUtils.createBlogsAndAddToPage();
 
 		var propertyName = ACDXPSettings.connectDXPtoAnalyticsCloud(siteName = "Site Name");
 
@@ -418,6 +421,8 @@ definition {
 			userLoginFullName = "ac ac");
 
 		ACUtils.navigateToSitePage(
+			actionType = "View Blog",
+			documentTitleList = "Blogs AC Title",
 			pageName = "AC Page",
 			siteName = "Site Name");
 

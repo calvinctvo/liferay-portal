@@ -284,6 +284,7 @@ definition {
 	@priority = "4"
 	test CanCreateWebBehaviorSegmentSinceXdays {
 		property test.name.skip.portal.instance = "SegmentsCreationWebBehavior#CanCreateWebBehaviorSegmentSinceXdays";
+		property portal.upstream = "calvin";
 
 		ACUtils.createWCAndAddToPage();
 
@@ -302,6 +303,8 @@ definition {
 			userLoginFullName = "ac ac");
 
 		ACUtils.navigateToSitePage(
+			actionType = "View WC",
+			documentTitleList = "Web Content AC Title",
 			pageName = "AC Page",
 			siteName = "Site Name");
 
@@ -681,6 +684,7 @@ definition {
 	@priority = "5"
 	test CanCreateWebBehaviorSegmentUsingEver {
 		property test.name.skip.portal.instance = "SegmentsCreationWebBehavior#CanCreateWebBehaviorSegmentUsingEver";
+		property portal.upstream = "calvin";
 
 		ACUtils.createWCAndAddToPage();
 
@@ -699,6 +703,8 @@ definition {
 			userLoginFullName = "ac ac");
 
 		ACUtils.navigateToSitePage(
+			actionType = "View WC",
+			documentTitleList = "Web Content AC Title",
 			pageName = "AC Page",
 			siteName = "Site Name");
 

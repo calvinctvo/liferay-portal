@@ -129,6 +129,9 @@ definition {
 	@priority = "5"
 	test CanShowSegmentList {
 		property test.name.skip.portal.instance = "SegmentsList#CanShowSegmentList";
+		property portal.upstream = "calvin";
+
+		ACUtils.createBlogsAndAddToPage();
 
 		JSONUser.addUser(
 			userEmailAddress = "userea@liferay.com",
@@ -143,6 +146,8 @@ definition {
 			userLoginFullName = "userfn userln");
 
 		ACUtils.navigateToSitePage(
+			actionType = "View Blog",
+			documentTitleList = "Blogs AC Title",
 			pageName = "AC Page",
 			siteName = "Site Name");
 
@@ -390,6 +395,9 @@ definition {
 	@priority = "3"
 	test PaginateSegmentList {
 		property test.name.skip.portal.instance = "SegmentsList#PaginateSegmentList";
+		property portal.upstream = "calvin";
+
+		ACUtils.createBlogsAndAddToPage();
 
 		task ("Add a new user in DXP") {
 			JSONUser.addUser(
@@ -416,6 +424,8 @@ definition {
 				userLoginFullName = "${fullName}");
 
 			ACUtils.navigateToSitePage(
+				actionType = "View Blog",
+				documentTitleList = "Blogs AC Title",
 				pageName = "AC Page",
 				siteName = "Site Name");
 
