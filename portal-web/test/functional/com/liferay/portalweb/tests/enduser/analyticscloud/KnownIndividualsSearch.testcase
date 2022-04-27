@@ -119,9 +119,6 @@ definition {
 	@priority = "3"
 	test AssertNoIndividualsAssociatedSegmentsResults {
 		property test.name.skip.portal.instance = "KnownIndividualsSearch#AssertNoIndividualsAssociatedSegmentsResults";
-		property portal.upstream = "calvin";
-
-		ACUtils.createBlogsAndAddToPage();
 
 		task ("Get site assigned property name") {
 			var propertyName = ACDXPSettings.connectDXPtoAnalyticsCloud(siteName = "Site Name");
@@ -145,8 +142,6 @@ definition {
 				userLoginFullName = "ac ac");
 
 			ACUtils.navigateToSitePage(
-				actionType = "View Blog",
-				documentTitleList = "Blogs AC Title",
 				pageName = "AC Page",
 				siteName = "Site Name");
 		}
@@ -256,10 +251,6 @@ definition {
 	@description = "Feature ID: Legacy | Automation ID: LRAC-9021 | Test Summary: Search associated segment will not return results in the individual overview List"
 	@priority = "3"
 	test AssertNoResultsInIndividualsOverviewAssociatedSegment {
-		property portal.upstream = "calvin";
-
-		ACUtils.createBlogsAndAddToPage();
-
 		task ("Get site assigned property name") {
 			var propertyName = ACDXPSettings.connectDXPtoAnalyticsCloud(siteName = "Site Name");
 		}
@@ -282,8 +273,6 @@ definition {
 				userLoginFullName = "ac ac");
 
 			ACUtils.navigateToSitePage(
-				actionType = "View Blog",
-				documentTitleList = "Blogs AC Title",
 				pageName = "AC Page",
 				siteName = "Site Name");
 		}
