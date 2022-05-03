@@ -124,12 +124,18 @@ definition {
 	@description = "Feature ID: Legacy | Automation ID: LRAC-8939 | Test Summary: Assert Individuals details search result displays correct number"
 	@priority = "3"
 	test AssertIndividualsSearchDetailsResult {
+		property portal.upstream = "calvin";
+
+		ACUtils.createBlogsAndAddToPage();
+
 		task ("Sign in as new user to view the site page") {
 			User.logoutAndLoginPG(
 				userLoginEmailAddress = "user1@liferay.com",
 				userLoginFullName = "user1 user1");
 
 			ACUtils.navigateToSitePage(
+				actionType = "View Blog",
+				documentTitleList = "Blogs AC Title",
 				pageName = "AC Page",
 				siteName = "Site Name");
 		}
@@ -185,12 +191,18 @@ definition {
 	@description = "Feature ID: Legacy | Automation ID: LRAC-8938 | Test Summary: Order an Individual's Details"
 	@priority = "3"
 	test OrderIndividualDetails {
+		property portal.upstream = "calvin";
+
+		ACUtils.createBlogsAndAddToPage();
+
 		task ("Sign in as new user to view the site page") {
 			User.logoutAndLoginPG(
 				userLoginEmailAddress = "user1@liferay.com",
 				userLoginFullName = "user1 user1");
 
 			ACUtils.navigateToSitePage(
+				actionType = "View Blog",
+				documentTitleList = "Blogs AC Title",
 				pageName = "AC Page",
 				siteName = "Site Name");
 		}

@@ -64,6 +64,8 @@ definition {
 	@description = "Feature ID: Legacy | Automation ID: LRAC-8907 | Test Summary: Expand activity in individual overview"
 	@priority = "3"
 	test CanExpandActivityInIndividualOverview {
+		property portal.upstream = "calvin";
+
 		task ("Create Blog to Add to Page") {
 			ACUtils.createBlogsAndAddToPage();
 		}
@@ -408,8 +410,14 @@ definition {
 	@description = "Feature ID: Legacy | Automation ID: LRAC-8904 | Test Summary: As a Business User, I should be able to view individuals name at top of page"
 	@priority = "4"
 	test ViewIndividualNameAtTheTopOfIndividualsPage {
+		property portal.upstream = "calvin";
+
+		ACUtils.createBlogsAndAddToPage();
+
 		task ("View the site page with new user") {
 			ACUtils.navigateToSitePageWithUser(
+				actionType = "View Blog",
+				documentTitleList = "Blogs AC Title",
 				emailList = "userea@liferay.com",
 				pageName = "AC Page",
 				siteName = "Site Name");

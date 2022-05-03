@@ -69,6 +69,9 @@ definition {
 	@priority = "4"
 	test CanAddSegmentUsingIndividualPropertyRole {
 		property test.name.skip.portal.instance = "SegmentsCreationIndividualAttributes#CanAddSegmentUsingIndividualPropertyRole";
+		property portal.upstream = "calvin";
+
+		ACUtils.createBlogsAndAddToPage();
 
 		task ("Add a new regular role and assign to the user") {
 			JSONRole.addRegularRole(
@@ -90,6 +93,8 @@ definition {
 				userLoginFullName = "ac ac");
 
 			ACUtils.navigateToSitePage(
+				actionType = "View Blog",
+				documentTitleList = "Blogs AC Title",
 				pageName = "AC Page",
 				siteName = "Site Name");
 		}
@@ -283,6 +288,9 @@ definition {
 	@priority = "4"
 	test CanAddSegmentUsingIndividualPropertyTeam {
 		property test.name.skip.portal.instance = "SegmentsCreationIndividualAttributes#CanAddSegmentUsingIndividualPropertyTeam";
+		property portal.upstream = "calvin";
+
+		ACUtils.createBlogsAndAddToPage();
 
 		task ("Assign the site to user") {
 			JSONGroup.assignUserToGroup(
@@ -312,6 +320,8 @@ definition {
 				userLoginFullName = "ac ac");
 
 			ACUtils.navigateToSitePage(
+				actionType = "View Blog",
+				documentTitleList = "Blogs AC Title",
 				pageName = "AC Page",
 				siteName = "Site Name");
 		}
@@ -420,6 +430,9 @@ definition {
 	@priority = "4"
 	test CanAddSegmentUsingIndividualPropertyUserGroup {
 		property test.name.skip.portal.instance = "SegmentsCreationIndividualAttributes#CanAddSegmentUsingIndividualPropertyUserGroup";
+		property portal.upstream = "calvin";
+
+		ACUtils.createBlogsAndAddToPage();
 
 		task ("Add a new user group and assign to the user") {
 			JSONUserGroup.addUserGroup(
@@ -441,6 +454,8 @@ definition {
 				userLoginFullName = "ac ac");
 
 			ACUtils.navigateToSitePage(
+				actionType = "View Blog",
+				documentTitleList = "Blogs AC Title",
 				pageName = "AC Page",
 				siteName = "Site Name");
 		}
@@ -484,6 +499,9 @@ definition {
 	@priority = "4"
 	test CanAddSegmentWithCustomFieldsForIndividuals {
 		property test.name.skip.portal.instance = "SegmentsCreationIndividualAttributes#CanAddSegmentWithCustomFieldsForIndividuals";
+		property portal.upstream = "calvin";
+
+		ACUtils.createBlogsAndAddToPage();
 
 		task ("Add a user custom field") {
 			ApplicationsMenu.gotoPortlet(
@@ -538,6 +556,8 @@ definition {
 				userLoginFullName = "ac ac");
 
 			ACUtils.navigateToSitePage(
+				actionType = "View Blog",
+				documentTitleList = "Blogs AC Title",
 				pageName = "AC Page",
 				siteName = "Site Name");
 		}
@@ -579,6 +599,9 @@ definition {
 	@priority = "4"
 	test CanAddSegmentWithCustomFieldsForOrganizations {
 		property test.name.skip.portal.instance = "SegmentsCreationIndividualAttributes#CanAddSegmentWithCustomFieldsForOrganizations";
+		property portal.upstream = "calvin";
+
+		ACUtils.createBlogsAndAddToPage();
 
 		task ("Add a new organization and assign to the user") {
 			JSONOrganization.addOrganization(organizationName = "Organization Name");
@@ -610,6 +633,8 @@ definition {
 				userLoginFullName = "ac ac");
 
 			ACUtils.navigateToSitePage(
+				actionType = "View Blog",
+				documentTitleList = "Blogs AC Title",
 				pageName = "AC Page",
 				siteName = "Site Name");
 		}

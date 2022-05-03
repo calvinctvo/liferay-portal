@@ -320,6 +320,9 @@ definition {
 	@priority = "5"
 	test CanCaseInsensitiveSearch {
 		var emailList = "randy.smith@liferay.com,maria.rau@liferay.com";
+		property portal.upstream = "calvin";
+
+		ACUtils.createBlogsAndAddToPage();
 
 		task ("Get site assigned property name") {
 			var propertyName = ACDXPSettings.connectDXPtoAnalyticsCloud(siteName = "Site Name");
@@ -344,6 +347,8 @@ definition {
 		task ("Sign in with the new user to visit the site pages") {
 			ACUtils.navigateToSitePageWithUser(
 				emailList = "${emailList}",
+				actionType = "View Blog",
+				documentTitleList = "Blogs AC Title",
 				pageName = "AC Page",
 				siteName = "Site Name");
 		}
@@ -382,9 +387,12 @@ definition {
 	@description = "Feature ID: Legacy | Automation ID: LRAC-9032 | Test Summary: Search and Clear Field"
 	@priority = "1"
 	test SearchAndClearField {
+		property portal.upstream = "calvin";
 		var usernameList = "user1,user2";
 		var emailList = "user1@liferay.com,user2@liferay.com";
 		var nameList = "user1 user1,user2 user2";
+
+		ACUtils.createBlogsAndAddToPage();
 
 		task ("Get site assigned property name") {
 			var propertyName = ACDXPSettings.connectDXPtoAnalyticsCloud(siteName = "Site Name");
@@ -405,6 +413,8 @@ definition {
 		task ("Sign in with the new user to visit the site pages") {
 			ACUtils.navigateToSitePageWithUser(
 				emailList = "${emailList}",
+				actionType = "View Blog",
+				documentTitleList = "Blogs AC Title",
 				pageName = "AC Page",
 				siteName = "Site Name");
 		}
@@ -443,6 +453,10 @@ definition {
 	@description = "Feature ID: Legacy | Automation ID: LRAC-9024 | Test Summary: Search an Individual's Details in the individual List"
 	@priority = "4"
 	test SearchIndividualDetails {
+		property portal.upstream = "calvin";
+
+		ACUtils.createBlogsAndAddToPage();
+
 		task ("Get site assigned property name") {
 			ACDXPSettings.connectDXPtoAnalyticsCloud(siteName = "Site Name");
 
@@ -466,6 +480,8 @@ definition {
 				userLoginFullName = "Randy Smith");
 
 			ACUtils.navigateToSitePage(
+				actionType = "View Blog",
+				documentTitleList = "Blogs AC Title",
 				pageName = "AC Page",
 				siteName = "Site Name");
 		}
@@ -552,7 +568,10 @@ definition {
 	@description = "Feature ID: Legacy | Automation ID: LRAC-9026 | Test Summary: Search for an Individual in the individual List"
 	@priority = "4"
 	test SearchIndividualList {
+		property portal.upstream = "calvin";
 		var emailList = "randy.smith@liferay.com,maria.rau@liferay.com";
+
+		ACUtils.createBlogsAndAddToPage();
 
 		task ("Get site assigned property name") {
 			var propertyName = ACDXPSettings.connectDXPtoAnalyticsCloud(siteName = "Site Name");
@@ -581,6 +600,8 @@ definition {
 		task ("Sign in with the new user to visit the site pages") {
 			ACUtils.navigateToSitePageWithUser(
 				emailList = "${emailList}",
+				actionType = "View Blog",
+				documentTitleList = "Blogs AC Title",
 				pageName = "AC Page",
 				siteName = "Site Name");
 		}
@@ -784,8 +805,11 @@ definition {
 	@description = "Feature ID: Legacy | Automation ID: LRAC-9029 | Test Summary: Sort Individuals List"
 	@priority = "3"
 	test SortIndividualList {
+		property portal.upstream = "calvin";
 		var usernameList = "user1,user2,user3";
 		var emailList = "user1@liferay.com,user2@liferay.com,user3@liferay.com";
+
+		ACUtils.createBlogsAndAddToPage();
 
 		task ("Get site assigned property name") {
 			var propertyName = ACDXPSettings.connectDXPtoAnalyticsCloud(siteName = "Site Name");
@@ -806,6 +830,8 @@ definition {
 		task ("Sign in with the new user to visit the site pages") {
 			ACUtils.navigateToSitePageWithUser(
 				emailList = "${emailList}",
+				actionType = "View Blog",
+				documentTitleList = "Blogs AC Title",
 				pageName = "AC Page",
 				siteName = "Site Name");
 		}
@@ -842,7 +868,10 @@ definition {
 	@description = "Feature ID: Legacy | Automation ID: LRAC-9030 | Test Summary: Sorting a List Returns a User to the First Page"
 	@priority = "3"
 	test SortingReturnsUserToFirstPage {
+		property portal.upstream = "calvin";
 		var usernameList = "user1,user2,user3,user4,user5,user6,user7";
+
+		ACUtils.createBlogsAndAddToPage();
 
 		task ("Get site assigned property name") {
 			var propertyName = ACDXPSettings.connectDXPtoAnalyticsCloud(siteName = "Site Name");
@@ -864,6 +893,8 @@ definition {
 			for (var name : list "${usernameList}") {
 				ACUtils.navigateToSitePageWithUser(
 					emailList = "${name}@liferay.com",
+					actionType = "View Blog",
+					documentTitleList = "Blogs AC Title",
 					pageName = "AC Page",
 					siteName = "Site Name");
 			}
@@ -919,7 +950,10 @@ definition {
 	@description = "Feature ID: Legacy | Automation ID: LRAC-9031 | Test Summary: Table Pagination"
 	@priority = "4"
 	test TablePagination {
+		property portal.upstream = "calvin";
 		var usernameList = "user1,user2,user3,user4,user5,user6";
+
+		ACUtils.createBlogsAndAddToPage();
 
 		task ("Get site assigned property name") {
 			var propertyName = ACDXPSettings.connectDXPtoAnalyticsCloud(siteName = "Site Name");
@@ -941,6 +975,8 @@ definition {
 			for (var name : list "${usernameList}") {
 				ACUtils.navigateToSitePageWithUser(
 					emailList = "${name}@liferay.com",
+					actionType = "View Blog",
+					documentTitleList = "Blogs AC Title",
 					pageName = "AC Page",
 					siteName = "Site Name");
 			}
