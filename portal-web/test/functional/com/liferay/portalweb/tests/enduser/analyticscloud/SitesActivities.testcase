@@ -116,6 +116,7 @@ definition {
 	@description = "Bug: LRAC-10257 | Automation ID: LRAC-10257 | Test Summary: Assert total amount of views in all cards"
 	@priority = "5"
 	test AssertTotalAmountOfViewsInAllCards {
+		property portal.upstream = "calvin";
 		ACDXPSettings.connectDXPtoAnalyticsCloud(siteName = "Site Name");
 
 		task ("Add a new user in DXP") {
@@ -138,6 +139,8 @@ definition {
 
 		task ("Interation with page") {
 			ACUtils.navigateToSitePageWithUser(
+				actionType = "View Blog",
+				documentTitleList = "Blogs AC Title",
 				pageName = "AC Page",
 				siteName = "Site Name");
 
