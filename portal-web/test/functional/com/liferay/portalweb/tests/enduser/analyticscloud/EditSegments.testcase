@@ -213,7 +213,7 @@ definition {
 
 		ACNavigation.switchTab(tabName = "Membership");
 
-		ACUtils.viewGenericText(textValueList = "There are no members found on the selected time period.,Check back later to verify if data has been received from your data sources.,Learn more about individuals.");
+		ACUtils.viewGenericText(textValueList = "There is no data for segment membership,Check back later to verify if data has been received from your data sources.,Learn more about segment membership.");
 	}
 
 	@description = "Feature ID: Legacy | Automation ID: LRAC-8135 | Test Summary: Edit a static segment and check the edits are saved"
@@ -352,14 +352,15 @@ definition {
 	@description = "Feature ID: Legacy | Automation ID: LRAC-8585 | Test Summary: It is not possible to add a duplicate user to a static segment"
 	@priority = "4"
 	test CantDuplicateUserToStaticSegment {
-		property analytics.cloud.upstream = "false";
+		property portal.upstream = "calvin";
 		property test.name.skip.portal.instance = "EditSegments#CantDuplicateUserToStaticSegment";
 
 		var usernameList = "ac,liferay";
 		var emailList = "ac@liferay.com,liferay@liferay.com";
 		var nameList = "ac ac,liferay liferay";
 		var propertyName = ACDXPSettings.connectDXPtoAnalyticsCloud(siteName = "Site Name");
-
+		
+		ACUtils.createWCAndAddToPage();
 		for (var name : list "${usernameList}") {
 			JSONUser.addUser(
 				userEmailAddress = "${name}@liferay.com",
@@ -452,7 +453,7 @@ definition {
 	@description = "Feature ID: Legacy | Automation ID: LRAC-8587 | Test Summary: Paginate list of members to be added to the segment"
 	@priority = "3"
 	test PaginateListOfMembersToBeAddedToTheSegment {
-		property analytics.cloud.upstream = "false";
+		property portal.upstream = "calvin";
 		property test.name.skip.portal.instance = "EditSegments#PaginateListOfMembersToBeAddedToTheSegment";
 
 		var users = "ac1,ac2,ac3,ac4,ac5,ac6,ac7";
@@ -461,6 +462,8 @@ definition {
 		task ("Conect DXP to AC") {
 			var propertyName = ACDXPSettings.connectDXPtoAnalyticsCloud(siteName = "Site Name");
 		}
+
+		ACUtils.createWCAndAddToPage();
 
 		task ("Add new users") {
 			for (var name : list "${users}") {
@@ -632,12 +635,13 @@ definition {
 	@description = "Feature ID: Legacy | Automation ID: LRAC-8586 | Test Summary: Sort the Segment 'Add Members' Modal"
 	@priority = "3"
 	test SortSegmentAddMembersModal {
-		property analytics.cloud.upstream = "false";
+		property portal.upstream = "calvin";
 		property test.name.skip.portal.instance = "EditSegments#SortSegmentAddMembersModal";
 
 		var users = "ac,liferay,dxp";
 		var emailList = "ac@liferay.com,liferay@liferay.com,dxp@liferay.com";
 
+		ACUtils.createWCAndAddToPage();
 		task ("Add a new user in DXP") {
 			for (var name : list "${users}") {
 				JSONUser.addUser(
@@ -711,11 +715,12 @@ definition {
 	@description = "Feature ID: Legacy | Automation ID: LRAC-8590 | Test Summary: Undo Adding a Segment Member in the Edit Modal"
 	@priority = "4"
 	test UndoAddingSegmentMemberInTheEditModal {
-		property analytics.cloud.upstream = "false";
+		property portal.upstream = "calvin";
 
 		var usernameList = "ac,liferay";
 		var emailList = "ac@liferay.com,liferay@liferay.com";
 
+		ACUtils.createWCAndAddToPage();
 		task ("Get site assigned property name") {
 			var propertyName = ACDXPSettings.connectDXPtoAnalyticsCloud(siteName = "Site Name");
 		}
@@ -865,12 +870,13 @@ definition {
 	@description = "Feature ID: Legacy | Automation ID: LRAC-8593 | Test Summary: Undo Deleting a Segment Member in the Edit Modal"
 	@priority = "4"
 	test UndoDeletingASegmentMemberInTheEditModal {
-		property analytics.cloud.upstream = "false";
+		property portal.upstream = "calvin";
 
 		var users = "ac,liferay";
 		var emailList = "ac@liferay.com,liferay@liferay.com";
 		var nameList = "ac ac,liferay liferay";
 
+		ACUtils.createWCAndAddToPage();
 		task ("Create two new users") {
 			for (var name : list "${users}") {
 				JSONUser.addUser(
@@ -950,12 +956,13 @@ definition {
 	@description = "Feature ID: Legacy | Automation ID: LRAC-8596 | Test Summary: Undo one static member from being added"
 	@priority = "3"
 	test UndoOneStaticMemberFromBeingAdded {
-		property analytics.cloud.upstream = "false";
+		property portal.upstream = "calvin";
 
 		var users = "ac,ac2,ac3";
 		var emailList = "ac@liferay.com,ac2@liferay.com,ac3@liferay.com";
 		var nameList = "ac ac,ac2 ac2,ac3 ac3";
 
+		ACUtils.createWCAndAddToPage();
 		task ("Create user and sincronize it") {
 			for (var user : list "${users}") {
 				JSONUser.addUser(
