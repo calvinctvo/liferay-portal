@@ -725,7 +725,7 @@ definition {
 	@description = "Forms visitor behavior card shows expected amount of views"
 	@priority = "5"
 	test VisitorBehaviorCardShowsExpectedAmountOfViews {
-		property portal.acceptance = "true";
+		property portal.acceptance = "false";
 		property portal.release = "true";
 		property test.name.skip.portal.instance = "AssetsForms#VisitorBehaviorCardShowsExpectedAmountOfViews";
 

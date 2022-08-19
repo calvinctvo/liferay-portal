@@ -831,7 +831,7 @@ definition {
 	@description = "View all blogs in the property in assets"
 	@priority = "5"
 	test ViewAllBlogsShownInAssetList {
-		property portal.acceptance = "true";
+		property portal.acceptance = "false";
 		property portal.release = "true";
 
 		ACUtils.createBlogsAndAddToPage(entryTitle = "Test 2");

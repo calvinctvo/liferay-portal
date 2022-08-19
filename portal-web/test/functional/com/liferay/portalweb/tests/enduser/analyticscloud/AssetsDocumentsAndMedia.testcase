@@ -1058,7 +1058,7 @@ definition {
 	@description = "Documents visitor behavior card shows expected amount of views"
 	@priority = "5"
 	test VisitorBehaviorCardShowsExpectedAmountOfPreviewsInDM {
-		property portal.acceptance = "true";
+		property portal.acceptance = "false";
 		property portal.release = "true";
 
 		var documentNameList = "DM AC Title,DM AC Title";
