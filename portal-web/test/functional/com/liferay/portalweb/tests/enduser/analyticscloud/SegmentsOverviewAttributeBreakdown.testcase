@@ -51,7 +51,7 @@ definition {
 				portlet = "Custom Fields");
 
 			CustomFields.addCP(
-				customFieldName = "User Custom Field",
+				customFieldName = "user custom field",
 				customFieldType = "True / False",
 				resourceName = "User");
 		}
@@ -69,7 +69,7 @@ definition {
 		task ("Connect the DXP to AC") {
 			ACDXPSettings.connectDXPtoAnalyticsCloud(siteName = "Site Name");
 
-			ACDXPSettings.syncNewUserData(fieldNameList = "User Custom Field");
+			ACDXPSettings.syncNewUserData(fieldNameList = "user custom field");
 		}
 
 		task ("View AC Page as new user") {
