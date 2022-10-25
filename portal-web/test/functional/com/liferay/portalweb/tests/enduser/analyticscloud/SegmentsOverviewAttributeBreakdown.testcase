@@ -39,6 +39,7 @@ definition {
 	@priority = "3"
 	test SegmentOverviewDistributionFilteredByBoolean {
 		property analytics.cloud.upstream = "false";
+		property portal.upstream = "calvin";
 
 		var users = "user1,user2";
 		var emailList = "user1@liferay.com,user2@liferay.com";
