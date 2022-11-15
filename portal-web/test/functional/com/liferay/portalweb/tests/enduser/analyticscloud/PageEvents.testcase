@@ -49,6 +49,7 @@ definition {
 	@priority = "5"
 	test CheckPageDepthReachedTo25 {
 		property proxy.server.enabled = "true";
+		property portal.upstream = "calvin";
 
 		task ("Add a Blogs widget to page") {
 			ACUtils.addWidgetToPage(
