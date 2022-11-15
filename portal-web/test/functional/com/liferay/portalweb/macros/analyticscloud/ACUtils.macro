@@ -348,6 +348,12 @@ definition {
 			actual = "${actualDataSourceId}",
 			expected = "${expectedDataSourceId}");
 
+		var actualEmailAddressHashed = ACUtils.getRequestCommonPropertyValue(property = "emailAddressHashed");
+
+		TestUtils.assertEquals(
+			actual = "actualEmailAddressHashed",
+			expected = "${expectedEmailAddressHashed}");
+
 		var id = ACUtils.getRequestCommonPropertyValue(property = "id");
 
 		TestUtils.assertNotEquals(

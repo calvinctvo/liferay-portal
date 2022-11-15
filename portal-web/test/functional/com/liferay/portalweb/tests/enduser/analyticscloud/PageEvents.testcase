@@ -118,7 +118,8 @@ definition {
 		task ("View the request common properties value") {
 			ACUtils.assertRequestCommonPropertiesValue(
 				expectedChannelId = "${expectedChannelId}",
-				expectedDataSourceId = "${expectedDataSourceId}");
+				expectedDataSourceId = "${expectedDataSourceId}",
+				expectedEmailAddressHashed = "${expectedEmailHashed}");
 		}
 	}
 
