@@ -39,6 +39,7 @@ definition {
 	@priority = "3"
 	test SegmentOverviewDistributionFilteredByBoolean {
 		property analytics.cloud.upstream = "false";
+		property portal.upstream = "calvin";
 
 		var users = "user1,user2";
 		var emailList = "user1@liferay.com,user2@liferay.com";
@@ -51,7 +52,7 @@ definition {
 				portlet = "Custom Fields");
 
 			CustomFields.addCP(
-				customFieldName = "User Custom Field",
+				customFieldName = "user custom field",
 				customFieldType = "True / False",
 				resourceName = "User");
 		}
@@ -69,7 +70,7 @@ definition {
 		task ("Connect the DXP to AC") {
 			ACDXPSettings.connectDXPtoAnalyticsCloud(siteName = "Site Name");
 
-			ACDXPSettings.syncNewUserData(fieldNameList = "User Custom Field");
+			ACDXPSettings.syncNewUserData(fieldNameList = "user custom field");
 		}
 
 		task ("View AC Page as new user") {
