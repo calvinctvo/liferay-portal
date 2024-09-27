@@ -1,0 +1,43 @@
+@component-name = "portal-analytics-cloud"
+definition {
+
+	property portal.release = "false";
+	property portal.upstream = "true";
+	property property.group = "analytics.cloud.profile";
+	property testray.main.component.name = "Analytics Cloud";
+
+	setUp {
+		    Navigator.openURL(baseURL = "https://osbasahdxpserver73-ac-stagingdxps.lfr.cloud/");
+	}
+
+	tearDown {
+		ACUtils.closeAllSessionsAndWait();
+
+	}
+
+    @description = "Test Summary: Cindy wants to create a custom event"
+    @priority = "4"
+	test GenerateRandomEvents {
+        ACUtils.navigateToSitePageWithUser(
+			emailList = "cindy.customevent@liferay.com",
+			pageName = "Home",
+			siteName = "Brother Ocean Co.");
+
+		Navigator.gotoPage(pageName = "Tools");
+
+		ACPersonas.addRandomEvent(randomEventName = "Cindy's Event",
+                                  attributeCount = "5");
+
+        Click(locator1 = "ACPersonas#BOOLEAN_CHECK_BOX");
+
+        Click(locator1 = "ACPersonas#DURATION_CHECK_BOX");
+
+		Click(locator1 = "ACPersonas#DATE_CHECK_BOX");
+
+        Click(locator1 = "ACPersonas#GENERATE_RANDOM_EVENT_BUTTON");
+
+        ACPersonas.addCustomEvent(placementAttributes = "height",
+                                  attributeValues = "5");
+    }
+
+}
